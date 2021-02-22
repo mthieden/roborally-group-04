@@ -21,9 +21,9 @@ class GameControllerTest {
         Board board = new Board(TEST_WIDTH, TEST_HEIGHT);
         gameController = new GameController(board);
         for (int i = 0; i < 6; i++) {
-            Player player = new Player(board, null,"Player " + i);
+            Player player = new Player(board, null, "Player " + i);
             board.addPlayer(player);
-            player.setSpace(board.getSpace(1,i));
+            player.setSpace(board.getSpace(i, i));
             player.setHeading(Heading.values()[(i + 1) % Heading.values().length]);
         }
         board.setCurrentPlayer(board.getPlayer(0));
@@ -33,7 +33,6 @@ class GameControllerTest {
     void tearDown() {
         gameController = null;
     }
-
     @Test
     void someTest() {
         Board board = gameController.board;
@@ -44,4 +43,42 @@ class GameControllerTest {
         Assertions.assertEquals(player, board.getSpace(0, 4).getPlayer(), "Player " + player.getName() + " should beSpace (0,4)!");
     }
 
+
+    @Test
+    void Testfstforward() {
+        Board board = gameController.board;
+
+        Player player = board.getCurrentPlayer();
+        player.setHeading(Heading.SOUTH);
+        gameController.fastForward(player);
+
+        Assertions.assertEquals(player, board.getSpace(0, 2).getPlayer(), "Player " + player.getName() + " should beSpace (0,4)!");
+    }
+
+    @Test
+    void Testforward() {
+        Board board = gameController.board;
+
+        Player player = board.getCurrentPlayer();
+        player.setHeading(Heading.SOUTH);
+        gameController.moveForward(player);
+
+        Assertions.assertEquals(player, board.getSpace(0, 1).getPlayer(), "Player " + player.getName() + " should beSpace (0,4)!");
+    }
+
+    @Test
+    void Testleft() {
+        Player player = gameController.board.getCurrentPlayer();
+        player.setHeading(Heading.SOUTH);
+        gameController.turnLeft(player);
+        Assertions.assertEquals(Heading.EAST, player.getHeading(), "Player 0 should be heading WEST");
+    }
+
+    @Test
+    void Testright() {
+        Player player = gameController.board.getCurrentPlayer();
+        player.setHeading(Heading.SOUTH);
+        gameController.turnRight(player);
+        Assertions.assertEquals(Heading.WEST, player.getHeading(), "Player 0 should be heading WEST");
+    }
 }
