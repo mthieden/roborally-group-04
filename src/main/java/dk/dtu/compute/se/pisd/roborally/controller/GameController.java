@@ -44,8 +44,7 @@ public class GameController {
      *
      * @param space the space to which the current player should move
      */
-    public void moveCurrentPlayerToSpace(@NotNull Space space)
-    {
+    public void moveCurrentPlayerToSpace(@NotNull Space space) {
         // TODO Assignment V1: method should be implemented by the students:
         //   - the current player should be moved to the given space
         //     (if it is free()
@@ -53,17 +52,20 @@ public class GameController {
         //     following the current player
         //   - the counter of moves in the game should be increased by one
         //     if the player is moved
+
         Player current = board.getCurrentPlayer();
-        if (space.getPlayer() == null)
-        {
+        if(space.getPlayer() == null) {
             current.setSpace(space);
-            int nextPlayerNumber = (board.getPlayerNumber(current) + 1) % board.getPlayersNumber();
+            int nextPlayerNumber = (board.getPlayerNumber(current)+1)%board.getPlayersNumber();
             board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
-            board.setCount(board.getCount() + 1);
-        } else
-        {
-            // TODO add something
+            board.setCount(board.getCount()+1);
         }
+        else {
+            // TODO add something
+
+        }
+
+
     }
 
     // XXX: V2
@@ -155,15 +157,7 @@ public class GameController {
                 CommandCard card = currentPlayer.getProgramField(step).getCard();
                 if (card != null) {
                     Command command = card.command;
-                    if(command.isInteractive())
-                    {
-                        board.setPhase(Phase.PLAYER_INTERACTION);
-                        return;
-                    }
-                    else
-                    {
-                        executeCommand(currentPlayer, command);
-                    }
+                    executeCommand(currentPlayer, command);
                 }
                 int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
                 if (nextPlayerNumber < board.getPlayersNumber()) {
@@ -188,31 +182,6 @@ public class GameController {
         }
     }
 
-    public void executeCommandOptionAndContinue(@NotNull Command command)
-    {
-        Player currentPlayer = board.getCurrentPlayer();
-        if(currentPlayer!=null &&
-            board.getPhase()== Phase.PLAYER_INTERACTION &&
-            command!= null)
-        {
-            board.setPhase(Phase.ACTIVATION);
-            executeCommand(currentPlayer, command);
-            int nextPlayerNumber = board.getPlayerNumber(currentPlayer) + 1;
-            if (nextPlayerNumber < board.getPlayersNumber()) {
-                board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
-            } else {
-                int step = board.getStep()+1;
-                if (step < Player.NO_REGISTERS) {
-                    makeProgramFieldsVisible(step);
-                    board.setStep(step);
-                    board.setCurrentPlayer(board.getPlayer(0));
-                } else {
-                    startProgrammingPhase();
-                }
-            }
-
-        }
-    }
     // XXX: V2
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
@@ -253,8 +222,8 @@ public class GameController {
 
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
-        moveForward(player);
-        moveForward(player);
+        this.moveForward(player);
+        this.moveForward(player);
     }
 
     // TODO Assignment V2
