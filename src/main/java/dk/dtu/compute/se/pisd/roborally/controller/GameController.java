@@ -69,6 +69,11 @@ public class GameController {
     }
 
     // XXX: V2
+
+    /**
+     * This is a method for the programming phase, where each player gets some random
+     * commando cards and can choose to place them on the card fields.
+     */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
         board.setCurrentPlayer(board.getPlayer(0));
@@ -99,6 +104,10 @@ public class GameController {
     }
 
     // XXX: V2
+
+    /**
+     * Method for finishing the programming phase and moving onto the activation phase.
+     */
     public void finishProgrammingPhase() {
         makeProgramFieldsInvisible();
         makeProgramFieldsVisible(0);
