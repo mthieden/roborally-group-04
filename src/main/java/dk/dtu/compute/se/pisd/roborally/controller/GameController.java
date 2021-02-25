@@ -236,7 +236,13 @@ public class GameController {
             }
         }
     }
-
+    /**
+     * moveForward moves the robot 1 space in the current direction
+     * moveForward uses the board.getNeightbour to change the space
+     *
+     * @author Mathias Ravn, s195468
+     *
+     */
     // TODO Assignment V2
     public void moveForward(@NotNull Player player) {
         Space current = player.getSpace();
@@ -249,17 +255,38 @@ public class GameController {
         }
     }
 
+    /**
+     * fastForward moves the robot 2 spaces in the current direction
+     * fastForward calls the moveForward command to run, which is the function
+     *
+     * @author Mathias Ravn, s195468
+     *
+     */
     // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
         this.moveForward(player);
         this.moveForward(player);
     }
-
+    /**
+     * turnRight causes the robots direction to change 90 degrees clockwise
+     * the function calls the setHeading function which has a builtin function .next
+     * to do what the is intended for.
+     * @author Mathias Ravn, s195468
+     *
+     */
     // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
         player.setHeading(player.getHeading().next());
     }
 
+    /**
+     * turnLeft causes the robots direction to change 90 degrees anti-clockwise
+     * the function calls the setHeading function which has a builtin function .next
+     * to do what the is intended for.
+     *
+     * @author Mathias Ravn, s195468
+     *
+     */
     // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
         player.setHeading(player.getHeading().prev());
