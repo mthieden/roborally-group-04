@@ -68,8 +68,6 @@ public class GameController {
 
     }
 
-    // XXX: V2
-
     /**
      * This is a method for the programming phase, where each player gets some random
      * commando cards and can choose to place them on the card fields.
@@ -242,6 +240,12 @@ public class GameController {
                     break;
                 case UTURN:
                     this.uTurn(player);
+                case FAST_FAST_FORWARD:
+                    this.fastFastForward(player);
+                    break;
+                case BACKUP:
+                    this.backUp(player);
+                    break;
                 default:
                     // DO NOTHING (for now)
             }
@@ -254,7 +258,6 @@ public class GameController {
      * @author Mathias Ravn, s195468
      *
      */
-    // TODO Assignment V2
     public void moveForward(@NotNull Player player) {
         Space current = player.getSpace();
         if(current != null && player.board == current.board) {
@@ -273,8 +276,13 @@ public class GameController {
      * @author Mathias Ravn, s195468
      *
      */
-    // TODO Assignment V2
     public void fastForward(@NotNull Player player) {
+        this.moveForward(player);
+        this.moveForward(player);
+    }
+
+    public void fastFastForward(@NotNull Player player) {
+        this.moveForward(player);
         this.moveForward(player);
         this.moveForward(player);
     }
@@ -285,21 +293,19 @@ public class GameController {
      * @author Mathias Ravn, s195468
      *
      */
-    // TODO Assignment V2
     public void turnRight(@NotNull Player player) {
         player.setHeading(player.getHeading().next());
     }
-
     /**
      * Turns player 180 degrees.
      * @author Haris Pelivani, s194749
      * @param player
      */
     public void uTurn(@NotNull Player player)
-        {
-            player.setHeading(player.getHeading().next());
-            player.setHeading(player.getHeading().next());
-        }
+    {
+        player.setHeading(player.getHeading().next());
+        player.setHeading(player.getHeading().next());
+    }
 
     /**
      * turnLeft causes the robots direction to change 90 degrees anti-clockwise
@@ -309,11 +315,23 @@ public class GameController {
      * @author Mathias Ravn, s195468
      *
      */
-    // TODO Assignment V2
     public void turnLeft(@NotNull Player player) {
         player.setHeading(player.getHeading().prev());
     }
 
+    /**
+     * backUp causes the robots to move backward without changing the direction the robot is headed
+     * @author Markus Thieden, s164920
+     *
+     */
+    public void backUp(@NotNull Player player)
+    {
+        player.setHeading(player.getHeading().prev());
+        player.setHeading(player.getHeading().prev());
+        this.moveForward(player);
+        player.setHeading(player.getHeading().prev());
+        player.setHeading(player.getHeading().prev());
+    }
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
