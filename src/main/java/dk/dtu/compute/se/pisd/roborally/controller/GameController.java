@@ -240,6 +240,8 @@ public class GameController {
                 case FAST_FORWARD:
                     this.fastForward(player);
                     break;
+                case UTURN:
+                    this.uTurn(player);
                 default:
                     // DO NOTHING (for now)
             }
@@ -287,6 +289,17 @@ public class GameController {
     public void turnRight(@NotNull Player player) {
         player.setHeading(player.getHeading().next());
     }
+
+    /**
+     * Turns player 180 degrees.
+     * @author Haris Pelivani, s194749
+     * @param player
+     */
+    public void uTurn(@NotNull Player player)
+        {
+            player.setHeading(player.getHeading().next());
+            player.setHeading(player.getHeading().next());
+        }
 
     /**
      * turnLeft causes the robots direction to change 90 degrees anti-clockwise
