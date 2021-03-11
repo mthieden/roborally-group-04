@@ -98,6 +98,15 @@ public class SpaceView extends StackPane implements ViewObserver {
             gc.strokeLine(2,  2,  2, SPACE_HEIGHT - 2);
         }
 
+        if(space.checkPoint) {
+            this.setStyle("-fx-background-color: cyan;");
+        }
+        else if(space.conveyorBelt != null)
+        {
+            gc.strokeLine(2,  2,  2, SPACE_HEIGHT - 2);
+        }
+
+
         this.getChildren().add(spaceBackground);
     }
 

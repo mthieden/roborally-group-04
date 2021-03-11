@@ -45,6 +45,10 @@ public class Space extends Subject {
     public final boolean southWall;
     public final boolean westWall;
 
+    public final boolean checkPoint;
+    public final Heading conveyorBelt;
+    public final boolean turnPoint;
+
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
@@ -58,6 +62,9 @@ public class Space extends Subject {
         southWall = temp == 3;
         westWall = temp == 4;
 
+        checkPoint = true;
+        conveyorBelt = null;
+        turnPoint = false;
     }
 
     public Player getPlayer() {
@@ -78,6 +85,46 @@ public class Space extends Subject {
             }
             notifyChange();
         }
+    }
+
+    /**
+     *
+     * @author Markus Visvaldis Ingemann Thieden, s164920
+     *
+     * function to get all wall orientation of the space
+     * @return: array of all walls on the space
+     */
+    public Heading[] getWallOrientation() {
+        // val is used to initialize the return array with the correct number of elements
+        int val = 0;
+        val += eastWall? 1 : 0;
+        val += westWall? 1 : 0;
+        val += southWall? 1 : 0;
+        val += northWall? 1 : 0;
+        Heading[] result = new Heading[val];
+
+        int count = 0;
+        if(this.eastWall)
+        {
+            result[count]= Heading.EAST;
+            count++;
+        }
+        if(this.westWall)
+        {
+            result[count]= Heading.WEST;
+            count++;
+        }
+        if(this.southWall)
+        {
+            result[count]= Heading.SOUTH;
+            count++;
+        }
+        if(this.northWall)
+        {
+            result[count]= Heading.NORTH;
+            count++;
+        }
+        return result;
     }
 
     void playerChanged() {

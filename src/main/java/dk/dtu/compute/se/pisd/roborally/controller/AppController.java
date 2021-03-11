@@ -145,6 +145,24 @@ public class AppController implements Observer {
             Platform.exit();
         }
     }
+    public void winnerWinnerChickenDinner() {
+        if (gameController != null) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Congratulationz you you won");
+            alert.setContentText("Congratulationz you you won");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (!result.isPresent() || result.get() != ButtonType.OK) {
+                return; // return without exiting the application
+            }
+        }
+
+        // If the user did not cancel, the RoboRally application will exit
+        // after the option to save the game
+        if (gameController == null || stopGame()) {
+            Platform.exit();
+        }
+    }
 
     public boolean isGameRunning() {
         return gameController != null;

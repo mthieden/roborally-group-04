@@ -254,6 +254,7 @@ public class GameController {
      * moveForward uses the board.getNeightbour to change the space
      *
      * @author Mathias Ravn, s195468
+     * @author Markus Visvaldis Ingemann Thieden, s164920
      *
      */
     public void moveForward(@NotNull Player player) {
@@ -262,7 +263,34 @@ public class GameController {
             Space target = board.getNeighbour(current, player.getHeading());
             if(target != null && target.getPlayer() == null)
             {
-                player.setSpace(target);
+                Heading[] spaceWalls = current.getWallOrientation();
+
+                boolean canMove = true;
+                for (int i = 0; i < spaceWalls.length; i++)
+                {
+                    if(player.getHeading() == spaceWalls[i])
+                    {
+                        canMove=false;
+                    }
+                }
+                spaceWalls = target.getWallOrientation();
+                for (int i = 0; i < spaceWalls.length; i++)
+                {
+                    if(player.getHeading() == spaceWalls[i].next().next())
+                    {
+                        canMove=false;
+                    }
+                }
+
+                if(canMove)
+                {
+                    player.setSpace(target);
+                    if(target.checkPoint)
+                    {
+                        player.addCheckPoints(target);
+                        System.out.println("plus points1!!!!");
+                    }
+                }
             }
         }
     }
