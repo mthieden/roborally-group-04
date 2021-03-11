@@ -47,7 +47,7 @@ public class Space extends Subject {
 
     public final boolean checkPoint;
     public final Heading conveyorBelt;
-    public final boolean turnPoint;
+    public final boolean rotationBelt;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -62,9 +62,9 @@ public class Space extends Subject {
         southWall = temp == 3;
         westWall = temp == 4;
 
-        checkPoint = true;
+        checkPoint = temp == 9;
         conveyorBelt = null;
-        turnPoint = false;
+        rotationBelt = false;
     }
 
     public Player getPlayer() {

@@ -134,23 +134,27 @@ public class Player extends Subject {
     public void addCheckPoints(Space checkPoint)
     {
         boolean addPoint=true;
-        for (int i = 0; i < points; i++)
-        {
-            if(checkPoints[i] == checkPoint)
-            {
-                addPoint=false;
-            }
-        }
-
-        if(addPoint)
-        {
-            checkPoints[points] = checkPoint;
-            points++;
-        }
-
         if(points==4)
         {
+            System.out.println("gz u won!");
 
+        }
+        else
+        {
+            for (int i = 0; i < points; i++)
+            {
+                if(checkPoints[i] == checkPoint)
+                {
+                    addPoint=false;
+                }
+            }
+
+            if(addPoint)
+            {
+                checkPoints[points] = checkPoint;
+                points++;
+                System.out.println("plus points1!!!!");
+            }
         }
     }
 

@@ -288,7 +288,6 @@ public class GameController {
                     if(target.checkPoint)
                     {
                         player.addCheckPoints(target);
-                        System.out.println("plus points1!!!!");
                     }
                 }
             }
