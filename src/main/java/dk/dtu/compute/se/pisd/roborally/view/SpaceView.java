@@ -33,6 +33,8 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+
 /**
  * ...
  *
@@ -65,15 +67,48 @@ public class SpaceView extends StackPane implements ViewObserver {
             this.setStyle("-fx-background-color: black;");
         }
 
+        drawBackground();
+
         // updatePlayer();
+
 
         // This space view should listen to changes of the space
         space.attach(this);
         update(space);
     }
 
+    private void drawBackground()
+    {
+        Canvas spaceBackground = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
+        GraphicsContext gc = spaceBackground.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(5);
+        gc.setLineCap(StrokeLineCap.ROUND);
+
+        if(space.northWall) {
+            gc.strokeLine(2,  2,  SPACE_WIDTH - 2,  2);
+        }
+        if(space.eastWall) {
+            gc.strokeLine(SPACE_WIDTH - 2,  2,  SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+        }
+        if(space.southWall) {
+            gc.strokeLine(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+        }
+        if(space.westWall) {
+            gc.strokeLine(2,  2,  2, SPACE_HEIGHT - 2);
+        }
+
+        this.getChildren().add(spaceBackground);
+    }
+
     private void updatePlayer() {
-        this.getChildren().clear();
+
+        if(this.getChildren().size() > 1)
+        {
+            this.getChildren().remove(1,this.getChildren().size());
+        }
+        //this.getChildren().clear();
+
 
         Player player = space.getPlayer();
         if (player != null) {

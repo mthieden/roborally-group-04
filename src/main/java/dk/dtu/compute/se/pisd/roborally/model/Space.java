@@ -23,6 +23,8 @@ package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
+import java.util.Random;
+
 /**
  * ...
  *
@@ -38,11 +40,24 @@ public class Space extends Subject {
 
     private Player player;
 
+    public final boolean northWall;
+    public final boolean eastWall;
+    public final boolean southWall;
+    public final boolean westWall;
+
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
         this.y = y;
         player = null;
+
+        Random rand = new Random();
+        int temp = rand.nextInt(10);
+        northWall = temp == 1;
+        eastWall = temp == 2;
+        southWall = temp == 3;
+        westWall = temp == 4;
+
     }
 
     public Player getPlayer() {
