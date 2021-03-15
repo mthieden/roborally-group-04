@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import dk.dtu.compute.se.pisd.roborally.exceptions.ImpossibleMoveExceptions;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -66,6 +67,58 @@ public class GameController {
         }
 
 
+    }
+    public void moveToSpace(@NotNull Player player,
+                            @NotNull Space space,
+                            @NotNull Heading heading) throws ImpossibleMoveExceptions
+    {
+        Player other = space.getPlayer();
+        Space target = board.getNeighbour(space, heading);
+        if(other != null)
+        {
+            if (target != null)
+            {
+                moveToSpace(other, target, heading);
+            } else
+            {
+                throw new ImpossibleMoveExceptions(player, space, heading);
+            }
+        }
+        else
+        {
+            Heading[] spaceWalls = space.getWallOrientation();
+            boolean canMove = true;
+            for (int i = 0; i < spaceWalls.length; i++)
+            {
+                if(player.getHeading() == spaceWalls[i])
+                {
+                    canMove=false;
+                }
+            }
+            spaceWalls = target.getWallOrientation();
+            for (int i = 0; i < spaceWalls.length; i++)
+            {
+                if(player.getHeading() == spaceWalls[i].next().next())
+                {
+                    canMove=false;
+                }
+            }
+
+            if(canMove)
+            {
+                player.setSpace(target);
+                if(target.checkPoint)
+                {
+                    player.addCheckPoints(target);
+                }
+            }
+            else
+            {
+                throw new ImpossibleMoveExceptions(player, space, heading);
+            }
+
+            player.setSpace(space);
+        }
     }
 
     /**
@@ -263,32 +316,13 @@ public class GameController {
             Space target = board.getNeighbour(current, player.getHeading());
             if(target != null && target.getPlayer() == null)
             {
-                Heading[] spaceWalls = current.getWallOrientation();
-
-                boolean canMove = true;
-                for (int i = 0; i < spaceWalls.length; i++)
+                try
                 {
-                    if(player.getHeading() == spaceWalls[i])
-                    {
-                        canMove=false;
-                    }
-                }
-                spaceWalls = target.getWallOrientation();
-                for (int i = 0; i < spaceWalls.length; i++)
+                    moveToSpace(player, target, player.getHeading());
+                } catch (ImpossibleMoveExceptions impossibleMoveExceptions)
                 {
-                    if(player.getHeading() == spaceWalls[i].next().next())
-                    {
-                        canMove=false;
-                    }
-                }
-
-                if(canMove)
-                {
-                    player.setSpace(target);
-                    if(target.checkPoint)
-                    {
-                        player.addCheckPoints(target);
-                    }
+                    impossibleMoveExceptions.printStackTrace();
+                    System.out.println("Cant move fucko");
                 }
             }
         }
