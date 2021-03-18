@@ -57,9 +57,6 @@ public class GameController {
         Player current = board.getCurrentPlayer();
         if(space.getPlayer() == null) {
             current.setSpace(space);
-            int nextPlayerNumber = (board.getPlayerNumber(current)+1)%board.getPlayersNumber();
-            board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
-            board.setCount(board.getCount()+1);
         }
         else {
             // TODO add something
@@ -68,6 +65,17 @@ public class GameController {
 
 
     }
+
+    /**
+     * Moves the player to neighboring space depending on the heading,
+     * recursively also move any player in the way
+     *
+     * @author Markus Visvaldis Ingemann Thieden, s164920
+     *
+     * @param player the player which moves
+     * @param space the space to which the player should move
+     * @param heading the way wich the player should
+     */
     public void moveToSpace(@NotNull Player player,
                             @NotNull Space space,
                             @NotNull Heading heading) throws ImpossibleMoveExceptions
@@ -80,44 +88,39 @@ public class GameController {
             {
                 moveToSpace(other, target, heading);
             } else
-            {
+           {
                 throw new ImpossibleMoveExceptions(player, space, heading);
+            }
+        }
+        Heading[] spaceWalls = player.getSpace().getWallOrientation();
+        boolean canMove = true;
+        for (int i = 0; i < spaceWalls.length; i++)
+        {
+            if(player.getHeading() == spaceWalls[i])
+            {
+                canMove=false;
+            }
+        }
+        spaceWalls = space.getWallOrientation();
+        for (int i = 0; i < spaceWalls.length; i++)
+        {
+            if(player.getHeading() == spaceWalls[i].next().next())
+            {
+                canMove=false;
+            }
+        }
+
+        if(canMove)
+        {
+            player.setSpace(space);
+            if(space.checkPoint)
+            {
+                player.addCheckPoints(space);
             }
         }
         else
         {
-            Heading[] spaceWalls = space.getWallOrientation();
-            boolean canMove = true;
-            for (int i = 0; i < spaceWalls.length; i++)
-            {
-                if(player.getHeading() == spaceWalls[i])
-                {
-                    canMove=false;
-                }
-            }
-            spaceWalls = target.getWallOrientation();
-            for (int i = 0; i < spaceWalls.length; i++)
-            {
-                if(player.getHeading() == spaceWalls[i].next().next())
-                {
-                    canMove=false;
-                }
-            }
-
-            if(canMove)
-            {
-                player.setSpace(target);
-                if(target.checkPoint)
-                {
-                    player.addCheckPoints(target);
-                }
-            }
-            else
-            {
-                throw new ImpossibleMoveExceptions(player, space, heading);
-            }
-
-            player.setSpace(space);
+            throw new ImpossibleMoveExceptions(player, space, heading);
         }
     }
 
@@ -302,6 +305,7 @@ public class GameController {
             }
         }
     }
+
     /**
      * moveForward moves the robot 1 space in the current direction
      * moveForward uses the board.getNeightbour to change the space
@@ -314,7 +318,7 @@ public class GameController {
         Space current = player.getSpace();
         if(current != null && player.board == current.board) {
             Space target = board.getNeighbour(current, player.getHeading());
-            if(target != null && target.getPlayer() == null)
+            if(target != null )
             {
                 try
                 {
