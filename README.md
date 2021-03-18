@@ -6,5 +6,7 @@ Run in intellij :)
 # How to play
 win by moving onto 4 checkpoints
 
+[THIS are the ruels](https://media.wizards.com/2017/rules/roborally_rules.pdf)
+
 # Game Functionalities
 stuff
