@@ -96,7 +96,7 @@ public class GameController {
         boolean canMove = true;
         for (int i = 0; i < spaceWalls.length; i++)
         {
-            if(player.getHeading() == spaceWalls[i])
+            if(heading == spaceWalls[i])
             {
                 canMove=false;
             }
@@ -104,7 +104,7 @@ public class GameController {
         spaceWalls = space.getWallOrientation();
         for (int i = 0; i < spaceWalls.length; i++)
         {
-            if(player.getHeading() == spaceWalls[i].next().next())
+            if(heading == spaceWalls[i].next().next())
             {
                 canMove=false;
             }
@@ -113,10 +113,6 @@ public class GameController {
         if(canMove)
         {
             player.setSpace(space);
-            if(space.checkPoint)
-            {
-                player.addCheckPoints(space);
-            }
         }
         else
         {
@@ -231,6 +227,7 @@ public class GameController {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
                     step++;
+                    runSpaceFunctions();
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
@@ -299,6 +296,43 @@ public class GameController {
                     break;
                 case BACKUP:
                     this.backUp(player);
+                    break;
+                default:
+                    // DO NOTHING (for now)
+            }
+        }
+    }
+
+    private void executeSpaceFunction(@NotNull Player player, SpaceFunction spaceFunction) {
+        if (player != null && player.board == board && spaceFunction != null) {
+            // XXX This is a very simplistic way of dealing with some basic cards and
+            //     their execution. This should eventually be done in a more elegant way
+            //     (this concerns the way cards are modelled as well as the way they are executed).
+
+            switch (spaceFunction) {
+                case CHECKPOINT:
+                    player.addCheckPoints(player.getSpace());
+                    System.out.println("Lortet virker, måske");
+                    break;
+                case CONVEYORBELT:
+                    try
+                    {
+                        this.moveToSpace(player, board.getNeighbour(player.getSpace(),spaceFunction.head), spaceFunction.getHeading());
+                    } catch (ImpossibleMoveExceptions impossibleMoveExceptions)
+                    {
+                        impossibleMoveExceptions.printStackTrace();
+                    }
+                    System.out.println("Lortet virker, måske");
+                    break;
+                case TURNINGPOINT:
+                    if(spaceFunction.getHeading()==Heading.WEST)
+                    {
+                        this.turnLeft(player);
+                    }
+                    else {
+                        this.turnRight(player);
+                    }
+                    System.out.println("Lortet drejer, måske");
                     break;
                 default:
                     // DO NOTHING (for now)
@@ -384,6 +418,7 @@ public class GameController {
         player.setHeading(player.getHeading().prev());
         player.setHeading(player.getHeading().prev());
     }
+
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
@@ -393,6 +428,22 @@ public class GameController {
             return true;
         } else {
             return false;
+        }
+    }
+    // execute all space functions
+    public void runSpaceFunctions()
+    {
+        for (int i = 0; i < board.getPlayersNumber(); i++)
+        {
+            Player player = board.getPlayer(i);
+            Space space = player.getSpace();
+            if(space.spaceFunctions !=null)
+            {
+                for (int j = 0; j < space.spaceFunctions.length; j++)
+                {
+                    executeSpaceFunction(player, space.spaceFunctions[j]);
+                }
+            }
         }
     }
 

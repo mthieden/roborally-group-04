@@ -45,9 +45,8 @@ public class Space extends Subject {
     public final boolean southWall;
     public final boolean westWall;
 
-    public final boolean checkPoint;
-    public final Heading conveyorBelt;
-    public final boolean rotationBelt;
+
+    public final SpaceFunction[] spaceFunctions;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -62,9 +61,27 @@ public class Space extends Subject {
         southWall = temp == 3;
         westWall = temp == 4;
 
-        checkPoint = temp == 9;
-        conveyorBelt = null;
-        rotationBelt = false;
+         if(temp == 9)
+         {
+             spaceFunctions = new SpaceFunction[1];
+             spaceFunctions[0] = SpaceFunction.CHECKPOINT;
+         }
+         else if(temp == 8)
+         {
+             spaceFunctions = new SpaceFunction[1];
+             spaceFunctions[0] = SpaceFunction.CONVEYORBELT;
+             spaceFunctions[0].setHeading(Heading.NORTH);
+         }
+         else if(temp == 7)
+         {
+             spaceFunctions = new SpaceFunction[1];
+             spaceFunctions[0] = SpaceFunction.TURNINGPOINT;
+             spaceFunctions[0].setHeading(Heading.WEST);
+         }
+         else
+         {
+             spaceFunctions =null;
+         }
     }
 
     public Player getPlayer() {
