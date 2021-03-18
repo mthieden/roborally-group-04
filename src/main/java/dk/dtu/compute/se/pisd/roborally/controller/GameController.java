@@ -68,56 +68,82 @@ public class GameController {
 
 
     }
+
+    /**
+     * moveForward moves the robot 1 space in the current direction
+     * moveForward uses the board.getNeightbour to change the space
+     *
+     * @author Mathias Ravn, s195468
+     * @author Markus Visvaldis Ingemann Thieden, s164920
+     *
+     */
+    public void moveForward(@NotNull Player player) {
+        Space current = player.getSpace();
+        Space target = board.getNeighbour(current, player.getHeading());
+
+        try
+        {
+            moveToSpace(player, target, player.getHeading());
+        } catch (ImpossibleMoveExceptions impossibleMoveExceptions)
+        {
+            //impossibleMoveExceptions.printStackTrace();
+            System.out.println("Cant move fucko");
+        }
+    }
+
+
+    /**
+     *
+     * @param player the robot being moved
+     * @param destSpace the space it is being moved to
+     * @param heading the direction it is heading
+     * @throws ImpossibleMoveExceptions
+     */
     public void moveToSpace(@NotNull Player player,
-                            @NotNull Space space,
+                            @NotNull Space destSpace,
                             @NotNull Heading heading) throws ImpossibleMoveExceptions
     {
-        Player other = space.getPlayer();
-        Space target = board.getNeighbour(space, heading);
-        if(other != null)
+
+        Space currentSpace = player.getSpace();
+
+        Heading[] walls = currentSpace.getWallOrientation();
+        boolean blockedByWalls = false;
+        for (int i = 0; i < walls.length; i++)
         {
-            if (target != null)
+            if(heading == walls[i])
             {
-                moveToSpace(other, target, heading);
-            } else
-            {
-                throw new ImpossibleMoveExceptions(player, space, heading);
+                blockedByWalls=true;
             }
+        }
+        walls = destSpace.getWallOrientation();
+        for (int i = 0; i < walls.length; i++)
+        {
+            if(heading == walls[i].next().next())
+            {
+                blockedByWalls=true;
+            }
+        }
+
+        if(blockedByWalls || destSpace == null)
+        {
+            throw new ImpossibleMoveExceptions(player, currentSpace, heading);
+        }
+
+        if(destSpace.getPlayer() == null)
+        {
+            player.setSpace(destSpace);
         }
         else
         {
-            Heading[] spaceWalls = space.getWallOrientation();
-            boolean canMove = true;
-            for (int i = 0; i < spaceWalls.length; i++)
+            try
             {
-                if(player.getHeading() == spaceWalls[i])
-                {
-                    canMove=false;
-                }
+                moveToSpace(destSpace.getPlayer(), destSpace.board.getNeighbour(destSpace, heading),heading);
+                player.setSpace(destSpace);
             }
-            spaceWalls = target.getWallOrientation();
-            for (int i = 0; i < spaceWalls.length; i++)
+            catch (ImpossibleMoveExceptions impossibleMoveExceptions)
             {
-                if(player.getHeading() == spaceWalls[i].next().next())
-                {
-                    canMove=false;
-                }
+                throw new ImpossibleMoveExceptions(player, destSpace, heading);
             }
-
-            if(canMove)
-            {
-                player.setSpace(target);
-                if(target.checkPoint)
-                {
-                    player.addCheckPoints(target);
-                }
-            }
-            else
-            {
-                throw new ImpossibleMoveExceptions(player, space, heading);
-            }
-
-            player.setSpace(space);
         }
     }
 
@@ -299,31 +325,6 @@ public class GameController {
                     break;
                 default:
                     // DO NOTHING (for now)
-            }
-        }
-    }
-    /**
-     * moveForward moves the robot 1 space in the current direction
-     * moveForward uses the board.getNeightbour to change the space
-     *
-     * @author Mathias Ravn, s195468
-     * @author Markus Visvaldis Ingemann Thieden, s164920
-     *
-     */
-    public void moveForward(@NotNull Player player) {
-        Space current = player.getSpace();
-        if(current != null && player.board == current.board) {
-            Space target = board.getNeighbour(current, player.getHeading());
-            if(target != null && target.getPlayer() == null)
-            {
-                try
-                {
-                    moveToSpace(player, target, player.getHeading());
-                } catch (ImpossibleMoveExceptions impossibleMoveExceptions)
-                {
-                    impossibleMoveExceptions.printStackTrace();
-                    System.out.println("Cant move fucko");
-                }
             }
         }
     }
