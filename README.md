@@ -15,4 +15,4 @@ win by moving onto 4 checkpoints
 * After gathering 4 points the player wins, which currently is only shown in the standard output
 * Conveyor belt fields which pushes a robot in a direction
 * Turn field which turns the robot when a robot lands on them
-* More fields have been added
+* More programming cards have been added
