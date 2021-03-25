@@ -25,6 +25,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
+import dk.dtu.compute.se.pisd.roborally.model.SpaceFunction;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
@@ -85,24 +86,34 @@ public class SpaceView extends StackPane implements ViewObserver {
         gc.setLineWidth(5);
         gc.setLineCap(StrokeLineCap.ROUND);
 
-        if(space.northWall) {
-            gc.strokeLine(2,  2,  SPACE_WIDTH - 2,  2);
-        }
-        if(space.eastWall) {
-            gc.strokeLine(SPACE_WIDTH - 2,  2,  SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
-        }
-        if(space.southWall) {
-            gc.strokeLine(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
-        }
-        if(space.westWall) {
-            gc.strokeLine(2,  2,  2, SPACE_HEIGHT - 2);
+        for (Heading wall:
+                space.getWalls()
+             )
+        {
+            switch (wall)
+            {
+                case NORTH:
+                    gc.strokeLine(2, 2, SPACE_WIDTH - 2, 2);
+                    break;
+                case SOUTH:
+                    gc.strokeLine(2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+                    break;
+                case WEST:
+                    gc.strokeLine(2, 2, 2, SPACE_HEIGHT - 2);
+                    break;
+                case EAST:
+                    gc.strokeLine(SPACE_WIDTH - 2, 2, SPACE_WIDTH - 2, SPACE_HEIGHT - 2);
+                    break;
+            }
         }
 
         if(space.spaceFunctions!= null)
         {
-            for (int i = 0; i < space.spaceFunctions.length; i++)
+            for (SpaceFunction spacefunc:
+                    space.getSpaceFunctions()
+                 )
             {
-                switch (space.spaceFunctions[i])
+                switch (spacefunc)
                 {
                     case CHECKPOINT:
                         this.setStyle("-fx-background-color: cyan;");
@@ -115,10 +126,9 @@ public class SpaceView extends StackPane implements ViewObserver {
                         break;
                     default:
                         break;
-
                 }
-            }
 
+            }
         }
 
         this.getChildren().add(spaceBackground);

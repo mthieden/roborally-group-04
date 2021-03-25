@@ -22,7 +22,13 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.CheckPoint;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.TurningPoint;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -40,13 +46,12 @@ public class Space extends Subject {
 
     private Player player;
 
-    public final boolean northWall;
-    public final boolean eastWall;
-    public final boolean southWall;
-    public final boolean westWall;
+    //public final SpaceFunction[] spaceFunctions;
 
+    public List<SpaceFunction> spaceFunctions = new ArrayList<>();
+    public List<FieldAction> field = new ArrayList<>();
+    public List<Heading> walls = new ArrayList<>();
 
-    public final SpaceFunction[] spaceFunctions;
 
     public Space(Board board, int x, int y) {
         this.board = board;
@@ -56,31 +61,43 @@ public class Space extends Subject {
 
         Random rand = new Random();
         int temp = rand.nextInt(10);
-        northWall = temp == 1;
-        eastWall = temp == 2;
-        southWall = temp == 3;
-        westWall = temp == 4;
+        if( temp == 1)
+        {
+            walls.add(Heading.NORTH);
+        }
+        if( temp == 2)
+        {
+            walls.add(Heading.SOUTH);
+        }
+        if( temp == 3)
+        {
+            walls.add(Heading.EAST);
+        }
+        if( temp == 4)
+        {
+            walls.add(Heading.WEST);
+        }
 
          if(temp == 9)
          {
-             spaceFunctions = new SpaceFunction[1];
-             spaceFunctions[0] = SpaceFunction.CHECKPOINT;
+             spaceFunctions.add( SpaceFunction.CHECKPOINT);
+
+             field.add(new CheckPoint());
          }
          else if(temp == 8)
          {
-             spaceFunctions = new SpaceFunction[1];
-             spaceFunctions[0] = SpaceFunction.CONVEYORBELT;
-             spaceFunctions[0].setHeading(Heading.NORTH);
+             SpaceFunction spacefunc = SpaceFunction.CONVEYORBELT;
+             spacefunc.setHeading(Heading.NORTH);
+             spaceFunctions.add(spacefunc);
+
+             field.add(new ConveyorBelt(Heading.NORTH));
          }
          else if(temp == 7)
          {
-             spaceFunctions = new SpaceFunction[1];
-             spaceFunctions[0] = SpaceFunction.TURNINGPOINT;
-             spaceFunctions[0].setHeading(Heading.WEST);
-         }
-         else
-         {
-             spaceFunctions =null;
+             SpaceFunction spacefunc = SpaceFunction.TURNINGPOINT;
+             spacefunc.setHeading(Heading.WEST);
+             spaceFunctions.add(spacefunc);
+             field.add(new TurningPoint(Heading.WEST));
          }
     }
 
@@ -111,37 +128,19 @@ public class Space extends Subject {
      * function to get all wall orientation of the space
      * @return: array of all walls on the space
      */
-    public Heading[] getWallOrientation() {
-        // val is used to initialize the return array with the correct number of elements
-        int val = 0;
-        val += eastWall? 1 : 0;
-        val += westWall? 1 : 0;
-        val += southWall? 1 : 0;
-        val += northWall? 1 : 0;
-        Heading[] result = new Heading[val];
+    public List<Heading> getWalls() {
+        return walls;
+    }
 
-        int count = 0;
-        if(this.eastWall)
-        {
-            result[count]= Heading.EAST;
-            count++;
-        }
-        if(this.westWall)
-        {
-            result[count]= Heading.WEST;
-            count++;
-        }
-        if(this.southWall)
-        {
-            result[count]= Heading.SOUTH;
-            count++;
-        }
-        if(this.northWall)
-        {
-            result[count]= Heading.NORTH;
-            count++;
-        }
-        return result;
+    public List<FieldAction> getField() {
+        return field;
+    }
+    public List<SpaceFunction> getSpaceFunctions() {
+        return spaceFunctions;
+    }
+
+    public void setWalls(List<Heading> walls) {
+        this.walls=walls;
     }
 
     void playerChanged() {
@@ -150,5 +149,6 @@ public class Space extends Subject {
         // notify the space of these changes by calling this method.
         notifyChange();
     }
+
 
 }

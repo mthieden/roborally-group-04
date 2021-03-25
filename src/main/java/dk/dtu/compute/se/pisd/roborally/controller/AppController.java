@@ -26,6 +26,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
+import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 
@@ -94,15 +95,18 @@ public class AppController implements Observer {
     }
 
     public void saveGame() {
+        System.out.println("start save");
+        LoadBoard.saveBoard(this.gameController.board, "LOL");
+        System.out.println("slut save");
         // XXX needs to be implemented eventually
     }
 
     public void loadGame() {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
-        if (gameController == null) {
-            newGame();
-        }
+        System.out.println("start load");
+        LoadBoard.loadBoard("LOL");
+        System.out.println("slut load");
     }
 
     /**
@@ -118,7 +122,8 @@ public class AppController implements Observer {
         if (gameController != null) {
 
             // here we save the game (without asking the user).
-            saveGame();
+            // TODO: beat up the guy who made this
+            //saveGame();
 
             gameController = null;
             roboRally.createBoardView(null);

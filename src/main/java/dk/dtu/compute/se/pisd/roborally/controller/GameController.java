@@ -25,6 +25,8 @@ import dk.dtu.compute.se.pisd.roborally.exceptions.ImpossibleMoveExceptions;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * ...
  *
@@ -92,19 +94,21 @@ public class GameController {
                 throw new ImpossibleMoveExceptions(player, space, heading);
             }
         }
-        Heading[] spaceWalls = player.getSpace().getWallOrientation();
+        List<Heading> spaceWalls = player.getSpace().getWalls();
+
         boolean canMove = true;
-        for (int i = 0; i < spaceWalls.length; i++)
+        for (Heading wall : spaceWalls)
         {
-            if(heading == spaceWalls[i])
+            if (heading == wall)
             {
-                canMove=false;
+                canMove = false;
             }
         }
-        spaceWalls = space.getWallOrientation();
-        for (int i = 0; i < spaceWalls.length; i++)
+
+        spaceWalls = space.getWalls();
+        for (Heading wall : spaceWalls)
         {
-            if(heading == spaceWalls[i].next().next())
+            if(heading == wall.next().next())
             {
                 canMove=false;
             }
@@ -304,6 +308,12 @@ public class GameController {
     }
 
     private void executeSpaceFunction(@NotNull Player player, SpaceFunction spaceFunction) {
+        for (FieldAction field:
+             player.getSpace().getField())
+        {
+           field.doAction(this, player.getSpace());
+        }
+        /*
         if (player != null && player.board == board && spaceFunction != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
             //     their execution. This should eventually be done in a more elegant way
@@ -338,6 +348,7 @@ public class GameController {
                     // DO NOTHING (for now)
             }
         }
+        */
     }
 
     /**
@@ -439,9 +450,10 @@ public class GameController {
             Space space = player.getSpace();
             if(space.spaceFunctions !=null)
             {
-                for (int j = 0; j < space.spaceFunctions.length; j++)
+                for (SpaceFunction func:
+                space.getSpaceFunctions())
                 {
-                    executeSpaceFunction(player, space.spaceFunctions[j]);
+                    executeSpaceFunction(player, func);
                 }
             }
         }
