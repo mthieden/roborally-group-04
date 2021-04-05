@@ -53,8 +53,10 @@ public class LoadBoard {
         System.out.println(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         System.out.println(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
-        InputStream inputStream = classLoader.getResourceAsStream(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
-        //InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
+        //InputStream inputStream = classLoader.getResourceAsStream(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
+        System.out.println(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
+        System.out.println(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
+        InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
 
         if (inputStream == null) {
             // TODO these constants should be defined somewhere

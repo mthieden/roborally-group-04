@@ -59,6 +59,7 @@ public class Space extends Subject {
         this.y = y;
         player = null;
 
+        /*
         Random rand = new Random();
         int temp = rand.nextInt(10);
         if( temp == 1)
@@ -99,6 +100,7 @@ public class Space extends Subject {
              spaceFunctions.add(spacefunc);
              field.add(new TurningPoint(Heading.WEST));
          }
+         */
     }
 
     public Player getPlayer() {
