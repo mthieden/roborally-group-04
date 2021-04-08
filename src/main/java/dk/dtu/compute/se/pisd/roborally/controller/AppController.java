@@ -27,6 +27,9 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 import dk.dtu.compute.se.pisd.roborally.RoboRally;
 
+import dk.dtu.compute.se.pisd.roborally.dal.GameInDB;
+import dk.dtu.compute.se.pisd.roborally.dal.IRepository;
+import dk.dtu.compute.se.pisd.roborally.dal.RepositoryAccess;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.LoadBoard;
 import dk.dtu.compute.se.pisd.roborally.model.Board;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
@@ -99,17 +102,35 @@ public class AppController implements Observer {
 
     public void saveGame() {
         System.out.println("start save");
-        LoadBoard.saveBoard(this.gameController.board, "LOL");
+        IRepository repository = RepositoryAccess.getRepository();
+        if(gameController.board.getGameId() == null)
+        {
+            repository.createGameInDB(gameController.board);
+            System.out.println("New save created with ID " + gameController.board.getGameId());
+        }
+        else
+        {
+            repository.updateGameInDB(gameController.board);
+            System.out.println("Updated ID " + gameController.board.getGameId());
+        }
         System.out.println("slut save");
-        // XXX needs to be implemented eventually
     }
 
     public void loadGame() {
         // XXX needs to be implememted eventually
         // for now, we just create a new game
-        System.out.println("start load");
-        LoadBoard.loadBoard("LOL");
-        System.out.println("slut load");
+
+        //get ID of latest save
+        IRepository repository = RepositoryAccess.getRepository();
+        List<GameInDB> savedGames = repository.getGames();
+        GameInDB lastSave = savedGames.get(savedGames.size() - 1);
+
+        //load the saved game
+        Board loadedBoard =  repository.loadGameFromDB(lastSave.id);
+
+        //start the loaded game
+        gameController = new GameController(loadedBoard);
+        roboRally.createBoardView(gameController);
     }
 
     /**

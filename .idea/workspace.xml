@@ -25,9 +25,8 @@
     <list default="true" id="009beb3a-5ad1-47d1-aa0d-d17ec1050e3c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/fileaccess/LoadBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/fileaccess/LoadBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/model/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/model/Space.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/boards/LOL.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/boards/LOL.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/Connector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schemas/createschema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schemas/createschema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +77,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -239,26 +241,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="database connection test" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1175" height="67" key="GridCell.Tab.0.bottom" timestamp="1617593995996">
-      <screen x="0" y="0" width="1218" height="720" />
+    <state width="1237" height="106" key="GridCell.Tab.0.bottom" timestamp="1617870489132">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1175" height="67" key="GridCell.Tab.0.bottom/0.0.1218.720@0.0.1218.720" timestamp="1617593995996" />
-    <state width="1237" height="103" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1617593326419" />
-    <state width="1175" height="67" key="GridCell.Tab.0.center" timestamp="1617593995996">
-      <screen x="0" y="0" width="1218" height="720" />
+    <state width="1237" height="106" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1617870489132" />
+    <state width="1237" height="106" key="GridCell.Tab.0.center" timestamp="1617870489132">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1175" height="67" key="GridCell.Tab.0.center/0.0.1218.720@0.0.1218.720" timestamp="1617593995996" />
-    <state width="1237" height="103" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1617593326419" />
-    <state width="1175" height="67" key="GridCell.Tab.0.left" timestamp="1617593995996">
-      <screen x="0" y="0" width="1218" height="720" />
+    <state width="1237" height="106" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1617870489132" />
+    <state width="1237" height="106" key="GridCell.Tab.0.left" timestamp="1617870489132">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1175" height="67" key="GridCell.Tab.0.left/0.0.1218.720@0.0.1218.720" timestamp="1617593995996" />
-    <state width="1237" height="103" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1617593326419" />
-    <state width="1175" height="67" key="GridCell.Tab.0.right" timestamp="1617593995996">
-      <screen x="0" y="0" width="1218" height="720" />
+    <state width="1237" height="106" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1617870489132" />
+    <state width="1237" height="106" key="GridCell.Tab.0.right" timestamp="1617870489132">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1175" height="67" key="GridCell.Tab.0.right/0.0.1218.720@0.0.1218.720" timestamp="1617593995996" />
-    <state width="1237" height="103" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1617593326419" />
+    <state width="1237" height="106" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1617870489132" />
     <state width="1175" height="67" key="GridCell.Tab.1.bottom" timestamp="1617594006883">
       <screen x="0" y="0" width="1218" height="720" />
     </state>
@@ -279,11 +281,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/fileaccess/LoadBoard.java</url>
           <line>60</line>
