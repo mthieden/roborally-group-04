@@ -41,6 +41,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -117,16 +118,29 @@ public class AppController implements Observer {
     }
 
     public void loadGame() {
-        // XXX needs to be implememted eventually
-        // for now, we just create a new game
-
-        //get ID of latest save
+        //Prompt user for a game ID to load
         IRepository repository = RepositoryAccess.getRepository();
         List<GameInDB> savedGames = repository.getGames();
-        GameInDB lastSave = savedGames.get(savedGames.size() - 1);
+
+        List<Integer> ids = new ArrayList<>(); //(List<Integer>) savedGames.stream().map(e -> e.id);
+        for(GameInDB tempGame : savedGames)
+        {
+            ids.add(tempGame.id);
+        }
+
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(ids.get(0), ids);
+        dialog.setTitle("Select a game to load");
+        dialog.setHeaderText("Load a game");
+        Optional<Integer> result = dialog.showAndWait();
+
+        System.out.println("You chose game " + result.get());
+        for (Integer j : ids)
+        {
+            System.out.println("Game ID: " + j);
+        }
 
         //load the saved game
-        Board loadedBoard =  repository.loadGameFromDB(lastSave.id);
+        Board loadedBoard = repository.loadGameFromDB(result.get());
 
         //start the loaded game
         gameController = new GameController(loadedBoard);
