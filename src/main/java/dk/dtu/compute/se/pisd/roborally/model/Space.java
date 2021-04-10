@@ -22,14 +22,10 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
-import dk.dtu.compute.se.pisd.roborally.controller.CheckPoint;
-import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
-import dk.dtu.compute.se.pisd.roborally.controller.TurningPoint;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * ...
@@ -46,10 +42,7 @@ public class Space extends Subject {
 
     private Player player;
 
-    //public final SpaceFunction[] spaceFunctions;
-
-    public List<SpaceFunction> spaceFunctions = new ArrayList<>();
-    public List<FieldAction> field = new ArrayList<>();
+    public List<FieldAction> fieldActions = new ArrayList<>();
     public List<Heading> walls = new ArrayList<>();
 
 
@@ -58,49 +51,6 @@ public class Space extends Subject {
         this.x = x;
         this.y = y;
         player = null;
-
-        /*
-        Random rand = new Random();
-        int temp = rand.nextInt(10);
-        if( temp == 1)
-        {
-            walls.add(Heading.NORTH);
-        }
-        if( temp == 2)
-        {
-            walls.add(Heading.SOUTH);
-        }
-        if( temp == 3)
-        {
-            walls.add(Heading.EAST);
-        }
-        if( temp == 4)
-        {
-            walls.add(Heading.WEST);
-        }
-
-         if(temp == 9)
-         {
-             spaceFunctions.add( SpaceFunction.CHECKPOINT);
-
-             field.add(new CheckPoint());
-         }
-         else if(temp == 8)
-         {
-             SpaceFunction spacefunc = SpaceFunction.CONVEYORBELT;
-             spacefunc.setHeading(Heading.NORTH);
-             spaceFunctions.add(spacefunc);
-
-             field.add(new ConveyorBelt(Heading.NORTH));
-         }
-         else if(temp == 7)
-         {
-             SpaceFunction spacefunc = SpaceFunction.TURNINGPOINT;
-             spacefunc.setHeading(Heading.WEST);
-             spaceFunctions.add(spacefunc);
-             field.add(new TurningPoint(Heading.WEST));
-         }
-         */
     }
 
     public Player getPlayer() {
@@ -134,11 +84,8 @@ public class Space extends Subject {
         return walls;
     }
 
-    public List<FieldAction> getField() {
-        return field;
-    }
-    public List<SpaceFunction> getSpaceFunctions() {
-        return spaceFunctions;
+    public List<FieldAction> getFieldActions() {
+        return fieldActions;
     }
 
     public void setWalls(List<Heading> walls) {

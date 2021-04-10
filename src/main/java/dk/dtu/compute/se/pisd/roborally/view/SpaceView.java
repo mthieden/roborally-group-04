@@ -22,10 +22,12 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
+import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
+import dk.dtu.compute.se.pisd.roborally.controller.TurningPoint;
 import dk.dtu.compute.se.pisd.roborally.model.Heading;
 import dk.dtu.compute.se.pisd.roborally.model.Player;
 import dk.dtu.compute.se.pisd.roborally.model.Space;
-import dk.dtu.compute.se.pisd.roborally.model.SpaceFunction;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
@@ -33,8 +35,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
 
 /**
  * ...
@@ -107,30 +107,62 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
         }
 
-        if(space.spaceFunctions!= null)
+
+        gc.setLineWidth(2);
+        gc.setStroke(Color.BLUE);
+        for(FieldAction action : space.getFieldActions())
         {
-            for (SpaceFunction spacefunc:
-                    space.getSpaceFunctions()
-                 )
+            if(action instanceof ConveyorBelt)
             {
-                switch (spacefunc)
+                switch (((ConveyorBelt) action).getHeading())
                 {
-                    case CHECKPOINT:
-                        this.setStyle("-fx-background-color: cyan;");
+                    case NORTH:
+                        gc.strokeLine(2, SPACE_HEIGHT/2, SPACE_WIDTH/2, 2);
+                        gc.strokeLine(SPACE_WIDTH - 2, SPACE_HEIGHT/2, SPACE_WIDTH/2, 2);
                         break;
-                    case CONVEYORBELT:
-                        this.setStyle("-fx-background-color: grey;");
+                    case EAST:
+                        gc.strokeLine(SPACE_WIDTH/2, 2, SPACE_WIDTH - 2, SPACE_HEIGHT/2);
+                        gc.strokeLine(SPACE_WIDTH/2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT/2);
                         break;
-                    case TURNINGPOINT:
-                        this.setStyle("-fx-background-color: pink;");
+                    case WEST:
+                        gc.strokeLine(SPACE_WIDTH/2, 2, 2, SPACE_HEIGHT/2);
+                        gc.strokeLine(SPACE_WIDTH/2, SPACE_HEIGHT - 2, 2, SPACE_HEIGHT/2);
+                        break;
+                    case SOUTH:
+                        gc.strokeLine(2, SPACE_HEIGHT/2, SPACE_WIDTH/2, SPACE_HEIGHT - 2);
+                        gc.strokeLine(SPACE_WIDTH - 2, SPACE_HEIGHT/2, SPACE_WIDTH/2, SPACE_HEIGHT - 2);
                         break;
                     default:
-                        break;
+                        this.setStyle("-fx-background-color: pink;");
                 }
-
+            }
+            else if(action instanceof TurningPoint)
+            {
+                switch (((TurningPoint) action).getHeading())
+                {
+                    case WEST:
+                        gc.strokeLine(15, 15, SPACE_WIDTH - 15, 15);
+                        gc.strokeLine(15, SPACE_HEIGHT - 15, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
+                        gc.strokeLine(15, SPACE_HEIGHT/2, 15, SPACE_HEIGHT - 15);
+                        gc.strokeLine(SPACE_WIDTH - 15, 15, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
+                        gc.strokeLine(15, 15, SPACE_WIDTH/2, 5);
+                        gc.strokeLine(15, 15, SPACE_WIDTH/2, 25);
+                        break;
+                    case NORTH:
+                    case EAST:
+                    case SOUTH:
+                        gc.strokeLine(15, 15, SPACE_WIDTH - 15, 15);
+                        gc.strokeLine(15, SPACE_HEIGHT - 15, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
+                        gc.strokeLine(15, 15, 15, SPACE_HEIGHT - 15);
+                        gc.strokeLine(SPACE_WIDTH - 15, SPACE_WIDTH/2, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
+                        gc.strokeLine(SPACE_WIDTH - 15, 15, SPACE_WIDTH/2, 5);
+                        gc.strokeLine(SPACE_WIDTH - 15, 15, SPACE_WIDTH/2, 25);
+                        break;
+                    default:
+                        this.setStyle("-fx-background-color: cyan;");
+                }
             }
         }
-
         this.getChildren().add(spaceBackground);
     }
 

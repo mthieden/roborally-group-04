@@ -12,6 +12,12 @@
           "INSTANCE": {
             "heading": "WEST"
           }
+        },
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.TurningPoint",
+          "INSTANCE": {
+            "heading": "WEST"
+          }
         }
       ],
       "x": 0,
@@ -151,6 +157,12 @@
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
           "INSTANCE": {
             "heading": "WEST"
+          }
+        },
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.TurningPoint",
+          "INSTANCE": {
+            "heading": "EAST"
           }
         }
       ],

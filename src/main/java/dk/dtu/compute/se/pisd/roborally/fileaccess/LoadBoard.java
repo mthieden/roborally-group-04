@@ -50,12 +50,7 @@ public class LoadBoard {
         }
 
         ClassLoader classLoader = LoadBoard.class.getClassLoader();
-        System.out.println(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
         System.out.println(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
-        //InputStream inputStream = classLoader.getResourceAsStream(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
-        System.out.println(classLoader.getResource(BOARDSFOLDER).getPath() + "/" + boardname + "." + JSON_EXT);
-        System.out.println(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
         InputStream inputStream = classLoader.getResourceAsStream(BOARDSFOLDER + "/" + boardname + "." + JSON_EXT);
 
         if (inputStream == null) {
@@ -80,7 +75,7 @@ public class LoadBoard {
 			for (SpaceTemplate spaceTemplate: template.spaces) {
 			    Space space = result.getSpace(spaceTemplate.x, spaceTemplate.y);
 			    if (space != null) {
-                    space.getField().addAll(spaceTemplate.action);
+                    space.getFieldActions().addAll(spaceTemplate.actions);
                     space.getWalls().addAll(spaceTemplate.walls);
                 }
             }
@@ -110,11 +105,11 @@ public class LoadBoard {
         for (int i=0; i<board.width; i++) {
             for (int j=0; j<board.height; j++) {
                 Space space = board.getSpace(i,j);
-                if (!space.getWalls().isEmpty() || !space.getField().isEmpty()) {
+                if (!space.getWalls().isEmpty() || !space.getFieldActions().isEmpty()) {
                     SpaceTemplate spaceTemplate = new SpaceTemplate();
                     spaceTemplate.x = space.x;
                     spaceTemplate.y = space.y;
-                    spaceTemplate.action.addAll(space.getField());
+                    spaceTemplate.actions.addAll(space.getFieldActions());
                     spaceTemplate.walls.addAll(space.getWalls());
                     template.spaces.add(spaceTemplate);
                 }

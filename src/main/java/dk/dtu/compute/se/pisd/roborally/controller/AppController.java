@@ -122,7 +122,7 @@ public class AppController implements Observer {
         IRepository repository = RepositoryAccess.getRepository();
         List<GameInDB> savedGames = repository.getGames();
 
-        List<Integer> ids = new ArrayList<>(); //(List<Integer>) savedGames.stream().map(e -> e.id);
+        List<Integer> ids = new ArrayList<>();
         for(GameInDB tempGame : savedGames)
         {
             ids.add(tempGame.id);

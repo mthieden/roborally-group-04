@@ -231,7 +231,7 @@ public class GameController {
                     board.setCurrentPlayer(board.getPlayer(nextPlayerNumber));
                 } else {
                     step++;
-                    runSpaceFunctions();
+                    executeSpaceActions();
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
@@ -305,50 +305,6 @@ public class GameController {
                     // DO NOTHING (for now)
             }
         }
-    }
-
-    private void executeSpaceFunction(@NotNull Player player, SpaceFunction spaceFunction) {
-        for (FieldAction field:
-             player.getSpace().getField())
-        {
-           field.doAction(this, player.getSpace());
-        }
-        /*
-        if (player != null && player.board == board && spaceFunction != null) {
-            // XXX This is a very simplistic way of dealing with some basic cards and
-            //     their execution. This should eventually be done in a more elegant way
-            //     (this concerns the way cards are modelled as well as the way they are executed).
-
-            switch (spaceFunction) {
-                case CHECKPOINT:
-                    player.addCheckPoints(player.getSpace());
-                    System.out.println("Lortet virker, måske");
-                    break;
-                case CONVEYORBELT:
-                    try
-                    {
-                        this.moveToSpace(player, board.getNeighbour(player.getSpace(),spaceFunction.head), spaceFunction.getHeading());
-                    } catch (ImpossibleMoveExceptions impossibleMoveExceptions)
-                    {
-                        impossibleMoveExceptions.printStackTrace();
-                    }
-                    System.out.println("Lortet virker, måske");
-                    break;
-                case TURNINGPOINT:
-                    if(spaceFunction.getHeading()==Heading.WEST)
-                    {
-                        this.turnLeft(player);
-                    }
-                    else {
-                        this.turnRight(player);
-                    }
-                    System.out.println("Lortet drejer, måske");
-                    break;
-                default:
-                    // DO NOTHING (for now)
-            }
-        }
-        */
     }
 
     /**
@@ -441,19 +397,20 @@ public class GameController {
             return false;
         }
     }
+
     // execute all space functions
-    public void runSpaceFunctions()
+    public void executeSpaceActions()
     {
         for (int i = 0; i < board.getPlayersNumber(); i++)
         {
             Player player = board.getPlayer(i);
             Space space = player.getSpace();
-            if(space.spaceFunctions !=null)
+
+            if(!space.getFieldActions().isEmpty())
             {
-                for (SpaceFunction func:
-                space.getSpaceFunctions())
+                for (FieldAction field : player.getSpace().getFieldActions())
                 {
-                    executeSpaceFunction(player, func);
+                    field.doAction(this, player.getSpace());
                 }
             }
         }
