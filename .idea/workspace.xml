@@ -22,11 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="009beb3a-5ad1-47d1-aa0d-d17ec1050e3c" name="Default Changelist" comment="fixes to board loading, changed some drawings in SpaceView">
+    <list default="true" id="009beb3a-5ad1-47d1-aa0d-d17ec1050e3c" name="Default Changelist" comment="boardname is saved to the database and used to load the actual board from resource folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/fileaccess/LoadBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/fileaccess/LoadBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/schemas/createschema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schemas/createschema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +187,7 @@
       <workItem from="1614005280734" duration="5375000" />
       <workItem from="1617970304641" duration="16261000" />
       <workItem from="1618045682939" duration="9467000" />
-      <workItem from="1618138325225" duration="10044000" />
+      <workItem from="1618138325225" duration="20870000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented v2">
       <created>1614006140819</created>
@@ -233,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618054226234</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="boardname is saved to the database and used to load the actual board from resource folder">
+      <created>1618149859363</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1618149859363</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +263,7 @@
     <MESSAGE value="database connection test" />
     <MESSAGE value="Added modal dialog to loadGame" />
     <MESSAGE value="fixes to board loading, changed some drawings in SpaceView" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes to board loading, changed some drawings in SpaceView" />
+    <MESSAGE value="boardname is saved to the database and used to load the actual board from resource folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="boardname is saved to the database and used to load the actual board from resource folder" />
   </component>
 </project>
