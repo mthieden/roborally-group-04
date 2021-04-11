@@ -60,7 +60,6 @@ public class ConveyorBelt extends FieldAction {
         {
             impossibleMoveExceptions.printStackTrace();
         }
-        System.out.println("Lortet virker, måske");
 
         return false;
     }

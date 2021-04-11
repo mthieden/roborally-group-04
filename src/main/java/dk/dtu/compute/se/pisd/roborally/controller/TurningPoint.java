@@ -59,9 +59,6 @@ public class TurningPoint extends FieldAction {
         else {
             gameController.turnRight(player);
         }
-        System.out.println("Lortet drejer, måske");
-
-
         return false;
     }
 

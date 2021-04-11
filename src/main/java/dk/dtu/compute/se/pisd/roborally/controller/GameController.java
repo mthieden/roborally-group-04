@@ -326,8 +326,7 @@ public class GameController {
                     moveToSpace(player, target, player.getHeading());
                 } catch (ImpossibleMoveExceptions impossibleMoveExceptions)
                 {
-                    impossibleMoveExceptions.printStackTrace();
-                    System.out.println("Cant move fucko");
+                    //do nothing
                 }
             }
         }

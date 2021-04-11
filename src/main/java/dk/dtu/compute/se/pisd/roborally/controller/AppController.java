@@ -121,7 +121,6 @@ public class AppController implements Observer {
     }
 
     public void saveGame() {
-        System.out.println("start save");
         IRepository repository = RepositoryAccess.getRepository();
         if(gameController.board.getGameId() == null)
         {
@@ -133,7 +132,6 @@ public class AppController implements Observer {
             repository.updateGameInDB(gameController.board);
             System.out.println("Updated ID " + gameController.board.getGameId());
         }
-        System.out.println("slut save");
     }
 
     public void loadGame() {
