@@ -44,12 +44,10 @@ public class Player extends Subject {
 
     private Space space;
     private Heading heading = SOUTH;
+    private int nextCheckpoint = 0;
 
     private CommandCardField[] program;
     private CommandCardField[] cards;
-    private int nextCheckpoint = 0; //TODO add nextCheckpoint to database
-    private int points=0;
-
 
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;

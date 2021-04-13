@@ -63,6 +63,8 @@ class Repository implements IRepository {
 
 	private static final String PLAYER_HEADING = "heading";
 
+	private static final String PLAYER_NEXTCHECKPOINT = "nextCheckpoint";
+
 	private static final String CARD_GAMEID = "gameID";
 	private static final String CARD_PLAYERID = "playerID";
 	private static final String CARD_HAND0 = "hand0";
@@ -482,6 +484,7 @@ class Repository implements IRepository {
 			rs.updateInt(PLAYER_POSITION_X, player.getSpace().x);
 			rs.updateInt(PLAYER_POSITION_Y, player.getSpace().y);
 			rs.updateInt(PLAYER_HEADING, player.getHeading().ordinal());
+			rs.updateInt(PLAYER_NEXTCHECKPOINT, player.getNextCheckpoint());
 			rs.insertRow();
 		}
 
@@ -508,8 +511,8 @@ class Repository implements IRepository {
 				player.setSpace(game.getSpace(x,y));
 				int heading = rs.getInt(PLAYER_HEADING);
 				player.setHeading(Heading.values()[heading]);
-
-				// TODO  should also load players program and hand here
+				int nextCheckpoint = rs.getInt(PLAYER_NEXTCHECKPOINT);
+				player.setNextCheckpoint(nextCheckpoint);
 			} else {
 				// TODO error handling
 				System.err.println("Game in DB does not have a player with id " + i +"!");
@@ -531,6 +534,7 @@ class Repository implements IRepository {
 			rs.updateInt(PLAYER_POSITION_X, player.getSpace().x);
 			rs.updateInt(PLAYER_POSITION_Y, player.getSpace().y);
 			rs.updateInt(PLAYER_HEADING, player.getHeading().ordinal());
+			rs.updateInt(PLAYER_NEXTCHECKPOINT, player.getNextCheckpoint());
 			// TODO error handling
 			// TODO take care of case when number of players changes, etc
 			rs.updateRow();
