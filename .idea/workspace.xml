@@ -22,11 +22,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="009beb3a-5ad1-47d1-aa0d-d17ec1050e3c" name="Default Changelist" comment="fixed checkpoints and added game over screen">
+    <list default="true" id="009beb3a-5ad1-47d1-aa0d-d17ec1050e3c" name="Default Changelist" comment="saving and loading implemented">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/boards/rollercoaster.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/dal/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schemas/createschema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schemas/createschema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dk/dtu/compute/se/pisd/roborally/controller/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/boards/LOL.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/boards/LOL.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/boards/defaultboard.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/boards/defaultboard.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,6 +190,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RoboRally" />
+        <item itemvalue="JUnit.dk.dtu.compute.se.pisd.roborally.RoboRally.java in roborally" />
         <item itemvalue="Application.RoboRally" />
         <item itemvalue="JUnit.dk.dtu.compute.se.pisd.roborally.RoboRally.java in roborally" />
       </list>

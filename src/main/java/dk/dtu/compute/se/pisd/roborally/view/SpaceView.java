@@ -110,11 +110,11 @@ public class SpaceView extends StackPane implements ViewObserver {
 
 
         gc.setLineWidth(2);
-        gc.setStroke(Color.BLUE);
         for(FieldAction action : space.getFieldActions())
         {
             if(action instanceof ConveyorBelt)
             {
+                gc.setStroke(Color.BLUE);
                 switch (((ConveyorBelt) action).getHeading())
                 {
                     case NORTH:
@@ -139,6 +139,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
             else if(action instanceof TurningPoint)
             {
+                gc.setStroke(Color.BLUE);
                 switch (((TurningPoint) action).getHeading())
                 {
                     case WEST:
@@ -165,6 +166,7 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
             else if(action instanceof CheckPoint)
             {
+                gc.setStroke(Color.GREEN);
                 if(((CheckPoint) action).getCheckpointNumber() == 0)
                 {
                     //gc.strokeOval(SPACE_WIDTH/2 - 15, SPACE_HEIGHT/2 - 20, 30, 40);

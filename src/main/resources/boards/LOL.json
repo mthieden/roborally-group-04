@@ -4,28 +4,20 @@
   "spaces": [
     {
       "walls": [
-        "SOUTH"
       ],
       "actions": [
-        {
-          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt",
-          "INSTANCE": {
-            "heading": "WEST"
-          }
-        },
-        {
+            {
           "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
           "INSTANCE": {
-            "checkpointNumber": 3
+            "checkpointNumber": 0
           }
         }
       ],
-      "x": 0,
+      "x": 7,
       "y": 0
     },
     {
       "walls": [
-        "SOUTH"
       ],
       "actions": [
         {
@@ -35,27 +27,11 @@
           }
         }
       ],
-      "x": 4,
-      "y": 4
-    },
-    {
-      "walls": [
-        "SOUTH"
-      ],
-      "actions": [
-        {
-          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
-          "INSTANCE": {
-            "checkpointNumber": 0
-          }
-        }
-      ],
       "x": 5,
-      "y": 5
+      "y": 1
     },
     {
       "walls": [
-        "SOUTH"
       ],
       "actions": [
         {
@@ -65,8 +41,106 @@
           }
         }
       ],
-      "x": 1,
+      "x": 4,
       "y": 2
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 3
+          }
+        }
+      ],
+      "x": 1,
+      "y": 3
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 4
+          }
+        }
+      ],
+      "x": 4,
+      "y": 4
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 5
+          }
+        }
+      ],
+      "x": 2,
+      "y": 5
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 6
+          }
+        }
+      ],
+      "x": 5,
+      "y": 6
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 7
+          }
+        }
+      ],
+      "x": 2,
+      "y": 7
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 8
+          }
+        }
+      ],
+      "x": 5,
+      "y": 7
+    },
+    {
+      "walls": [
+      ],
+      "actions": [
+        {
+          "CLASSNAME": "dk.dtu.compute.se.pisd.roborally.controller.CheckPoint",
+          "INSTANCE": {
+            "checkpointNumber": 9
+          }
+        }
+      ],
+      "x": 2,
+      "y": 0
     }
   ]
 }

@@ -83,6 +83,8 @@ public class AppController implements Observer {
                 selectedBoard = "defaultBoard";
                 break;
             case 2:
+                selectedBoard = "rollercoaster";
+                break;
             case 3:
                 selectedBoard = "LOL";
                 break;
@@ -175,10 +177,7 @@ public class AppController implements Observer {
      */
     public boolean stopGame() {
         if (gameController != null) {
-
-            // here we save the game (without asking the user).
-            // TODO: beat up the guy who made this
-            //saveGame();
+            //saveGame(); // here we save the game (without asking the user).
 
             gameController = null;
             roboRally.createBoardView(null);
