@@ -22,6 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.view;
 
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
+import dk.dtu.compute.se.pisd.roborally.controller.CheckPoint;
 import dk.dtu.compute.se.pisd.roborally.controller.ConveyorBelt;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
 import dk.dtu.compute.se.pisd.roborally.controller.TurningPoint;
@@ -160,6 +161,24 @@ public class SpaceView extends StackPane implements ViewObserver {
                         break;
                     default:
                         this.setStyle("-fx-background-color: cyan;");
+                }
+            }
+            else if(action instanceof CheckPoint)
+            {
+                if(((CheckPoint) action).getCheckpointNumber() == 0)
+                {
+                    //gc.strokeOval(SPACE_WIDTH/2 - 15, SPACE_HEIGHT/2 - 20, 30, 40);
+                    gc.strokeLine(SPACE_WIDTH/2 - 10,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 - 10, SPACE_HEIGHT/2 + 20 );
+                    gc.strokeLine(SPACE_WIDTH/2 + 10,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 + 10, SPACE_HEIGHT/2 + 20 );
+                    gc.strokeLine(SPACE_WIDTH/2 - 10,SPACE_HEIGHT/2 + 20, SPACE_WIDTH/2 + 10, SPACE_HEIGHT/2 + 20 );
+                    gc.strokeLine(SPACE_WIDTH/2 - 10,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 + 10, SPACE_HEIGHT/2 - 20 );
+                }
+                else
+                {
+                    for(int i = 0; i < ((CheckPoint) action).getCheckpointNumber(); i++)
+                    {
+                        gc.strokeLine(SPACE_WIDTH/2 - 25 + 5*i,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 - 25 + 5*i, SPACE_HEIGHT/2 + 20 );
+                    }
                 }
             }
         }

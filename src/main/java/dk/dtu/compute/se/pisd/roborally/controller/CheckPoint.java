@@ -35,10 +35,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public class CheckPoint extends FieldAction {
 
+    private int checkpointNumber;
+
+    public CheckPoint(int checkpointNumber) {
+        this.checkpointNumber = checkpointNumber;
+    }
+
+    public int getCheckpointNumber()
+    {
+        return checkpointNumber;
+    }
+
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         Player player = space.getPlayer();
-        player.addCheckPoints(player.getSpace());
+        if(player.getNextCheckpoint() == checkpointNumber)
+        {
+            player.setNextCheckpoint(checkpointNumber + 1);
+
+        }
         return false;
     }
 

@@ -21,6 +21,7 @@
  */
 package dk.dtu.compute.se.pisd.roborally.controller;
 
+import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import dk.dtu.compute.se.pisd.roborally.exceptions.ImpossibleMoveExceptions;
 import dk.dtu.compute.se.pisd.roborally.model.*;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +34,7 @@ import java.util.List;
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
-public class GameController {
+public class GameController extends Subject {
 
     final public Board board;
 
@@ -232,6 +233,7 @@ public class GameController {
                 } else {
                     step++;
                     executeSpaceActions();
+                    checkForWinner();
                     if (step < Player.NO_REGISTERS) {
                         makeProgramFieldsVisible(step);
                         board.setStep(step);
@@ -412,6 +414,23 @@ public class GameController {
                     field.doAction(this, player.getSpace());
                 }
             }
+        }
+    }
+
+    private void checkForWinner()
+    {
+        boolean gameOver = false;
+        for (int i = 0; i < board.getPlayersNumber(); i++) {
+            Player player = board.getPlayer(i);
+            if(player.getNextCheckpoint() > 4) //TODO replace magic number
+            {
+                gameOver = true;
+            }
+        }
+        if(gameOver)
+        {
+            notifyChange();
+
         }
     }
 

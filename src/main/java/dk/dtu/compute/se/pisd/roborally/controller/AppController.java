@@ -103,8 +103,8 @@ public class AppController implements Observer {
             //     here we just create an empty board with the required number of players.
 
             Board board = LoadBoard.loadBoard(selectedBoard); //new Board(8,8);
-
             gameController = new GameController(board);
+            gameController.attach(this); //observe the gameController to react when someone wins the game
             int no = result.get();
             for (int i = 0; i < no; i++) {
                 Player player = new Player(board, PLAYER_COLORS.get(i), "Player " + (i + 1));
@@ -208,8 +208,8 @@ public class AppController implements Observer {
     public void winnerWinnerChickenDinner() {
         if (gameController != null) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Congratulationz you you won");
-            alert.setContentText("Congratulationz you you won");
+            alert.setTitle("Congratulationz you won");
+            alert.setContentText(gameController.board.getCurrentPlayer().getName() + " has won the game!");
             Optional<ButtonType> result = alert.showAndWait();
 
             if (!result.isPresent() || result.get() != ButtonType.OK) {
@@ -231,7 +231,7 @@ public class AppController implements Observer {
 
     @Override
     public void update(Subject subject) {
-        // XXX do nothing for now
+        winnerWinnerChickenDinner();
     }
 
 }
