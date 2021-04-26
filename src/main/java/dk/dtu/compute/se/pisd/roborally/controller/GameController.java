@@ -77,7 +77,7 @@ public class GameController extends Subject {
      *
      * @param player the player which moves
      * @param space the space to which the player should move
-     * @param heading the way wich the player should
+     * @param heading the direction the player is being moved in
      */
     public void moveToSpace(@NotNull Player player,
                             @NotNull Space space,
@@ -127,7 +127,7 @@ public class GameController extends Subject {
 
     /**
      * This is a method for the programming phase, where each player gets some random
-     * commando cards and can choose to place them on the card fields.
+     * command cards and can choose to place them on the card fields.
      */
     public void startProgrammingPhase() {
         board.setPhase(Phase.PROGRAMMING);
@@ -151,14 +151,12 @@ public class GameController extends Subject {
         }
     }
 
-    // XXX: V2
+
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
         int random = (int) (Math.random() * commands.length);
         return new CommandCard(commands[random]);
     }
-
-    // XXX: V2
 
     /**
      * Method for finishing the programming phase and moving onto the activation phase.
@@ -171,7 +169,7 @@ public class GameController extends Subject {
         board.setStep(0);
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -182,7 +180,7 @@ public class GameController extends Subject {
         }
     }
 
-    // XXX: V2
+
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
@@ -193,26 +191,26 @@ public class GameController extends Subject {
         }
     }
 
-    // XXX: V2
+
     public void executePrograms() {
         board.setStepMode(false);
         continuePrograms();
     }
 
-    // XXX: V2
+
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-    // XXX: V2
+
     private void continuePrograms() {
         do {
             executeNextStep();
         } while (board.getPhase() == Phase.ACTIVATION && !board.isStepMode());
     }
 
-    // XXX: V2
+
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
@@ -277,7 +275,12 @@ public class GameController extends Subject {
         }
     }
 
-    // XXX: V2
+
+    /**
+     * Executes a command
+     * @param player the player executing the command
+     * @param command the command being executed
+     */
     private void executeCommand(@NotNull Player player, Command command) {
         if (player != null && player.board == board && command != null) {
             // XXX This is a very simplistic way of dealing with some basic cards and
@@ -387,6 +390,12 @@ public class GameController extends Subject {
         player.setHeading(player.getHeading().prev());
     }
 
+    /**
+     * Moves a CommandCard from one CommandCardField to another
+     * @param source the source field
+     * @param target the destination field
+     * @return true if the card was successfully moved
+     */
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();
         CommandCard targetCard = target.getCard();
@@ -399,7 +408,9 @@ public class GameController extends Subject {
         }
     }
 
-    // execute all space functions
+    /**
+     * Executes the actions of all fields that have a player on them
+     */
     public void executeSpaceActions()
     {
         for (int i = 0; i < board.getPlayersNumber(); i++)
@@ -417,6 +428,9 @@ public class GameController extends Subject {
         }
     }
 
+    /**
+     * Checks if a player has reached the final checkpoint and won the game
+     */
     private void checkForWinner()
     {
         boolean gameOver = false;

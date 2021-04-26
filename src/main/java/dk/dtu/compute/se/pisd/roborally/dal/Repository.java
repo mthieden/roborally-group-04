@@ -90,6 +90,11 @@ class Repository implements IRepository {
 		this.connector = connector;
 	}
 
+	/**
+	 * Creates a new save in the database
+	 * @param game the Board of the game
+	 * @return true if successful
+	 */
 	@Override
 	public boolean createGameInDB(Board game) {
 		if (game.getGameId() == null) {
@@ -167,7 +172,12 @@ class Repository implements IRepository {
 		}
 		return false;
 	}
-		
+
+	/**
+	 * Updates a save in the database
+	 * @param game the Board of the game
+	 * @return true if successful
+	 */
 	@Override
 	public boolean updateGameInDB(Board game) {
 		assert game.getGameId() != null;
@@ -213,7 +223,12 @@ class Repository implements IRepository {
 
 		return false;
 	}
-	
+
+	/**
+	 * Loads a game from the database
+	 * @param id the id of the game to be loaded
+	 * @return the loaded Board
+	 */
 	@Override
 	public Board loadGameFromDB(int id) {
 		Board game;
@@ -267,7 +282,11 @@ class Repository implements IRepository {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Get a list of all the saved games
+	 * @return a list of games
+	 */
 	@Override
 	public List<GameInDB> getGames() {
 		// TODO when there many games in the DB, fetching all available games

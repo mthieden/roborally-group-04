@@ -30,9 +30,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * ...
  *
- * @author Ekkart Kindler, ekki@dtu.dk
- *
+ * @author Markus Visvaldis Ingemann Thieden, s164920
+ * @author Tobias Sønderskov Hansen, s164270
  */
+
 public class CheckPoint extends FieldAction {
 
     private int checkpointNumber;
@@ -46,6 +47,12 @@ public class CheckPoint extends FieldAction {
         return checkpointNumber;
     }
 
+    /**
+     * If the checkpointNumber matches the player's nextCheckpoint, the player's nextCheckpoint is updated
+     * @param gameController the gameController of the respective game
+     * @param space the space this action should be executed for
+     * @return
+     */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         Player player = space.getPlayer();

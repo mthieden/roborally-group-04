@@ -50,7 +50,7 @@ import java.util.Optional;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
+ * @author Tobias Hansen, s164270
  */
 public class AppController implements Observer {
 
@@ -122,6 +122,10 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * Save a game to the database
+     * @author Tobias Hansen, s164270
+     */
     public void saveGame() {
         IRepository repository = RepositoryAccess.getRepository();
         if(gameController.board.getGameId() == null)
@@ -136,6 +140,10 @@ public class AppController implements Observer {
         }
     }
 
+    /**
+     * Load a game from the database
+     * @author Tobias Hansen, s164270
+     */
     public void loadGame() {
         //Prompt user for a game ID to load
         IRepository repository = RepositoryAccess.getRepository();
@@ -204,6 +212,10 @@ public class AppController implements Observer {
             Platform.exit();
         }
     }
+
+    /**
+     * Display the game over screen
+     */
     public void winnerWinnerChickenDinner() {
         if (gameController != null) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
