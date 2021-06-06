@@ -35,6 +35,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -108,30 +109,31 @@ public class SpaceView extends StackPane implements ViewObserver {
             }
         }
 
-
         gc.setLineWidth(2);
         for(FieldAction action : space.getFieldActions())
         {
             if(action instanceof ConveyorBelt)
             {
                 gc.setStroke(Color.BLUE);
+                gc.setFill(Color.BLUE);
+
                 switch (((ConveyorBelt) action).getHeading())
                 {
                     case NORTH:
-                        gc.strokeLine(2, SPACE_HEIGHT/2, SPACE_WIDTH/2, 2);
-                        gc.strokeLine(SPACE_WIDTH - 2, SPACE_HEIGHT/2, SPACE_WIDTH/2, 2);
+                        gc.fillPolygon(new double[]{SPACE_WIDTH*0.1, SPACE_WIDTH*0.5, SPACE_WIDTH*0.9},
+                                       new double[]{SPACE_HEIGHT*0.5, SPACE_HEIGHT*0.4, SPACE_HEIGHT*0.5}, 3);
                         break;
                     case EAST:
-                        gc.strokeLine(SPACE_WIDTH/2, 2, SPACE_WIDTH - 2, SPACE_HEIGHT/2);
-                        gc.strokeLine(SPACE_WIDTH/2, SPACE_HEIGHT - 2, SPACE_WIDTH - 2, SPACE_HEIGHT/2);
+                        gc.fillPolygon(new double[]{SPACE_WIDTH*0.5, SPACE_WIDTH*0.6, SPACE_WIDTH*0.5},
+                                       new double[]{SPACE_HEIGHT*0.1, SPACE_HEIGHT*0.5, SPACE_HEIGHT*0.9}, 3);
                         break;
                     case WEST:
-                        gc.strokeLine(SPACE_WIDTH/2, 2, 2, SPACE_HEIGHT/2);
-                        gc.strokeLine(SPACE_WIDTH/2, SPACE_HEIGHT - 2, 2, SPACE_HEIGHT/2);
+                        gc.fillPolygon(new double[]{SPACE_WIDTH*0.5, SPACE_WIDTH*0.4, SPACE_WIDTH*0.5},
+                                       new double[]{SPACE_HEIGHT*0.1, SPACE_HEIGHT*0.5, SPACE_HEIGHT*0.9}, 3);
                         break;
                     case SOUTH:
-                        gc.strokeLine(2, SPACE_HEIGHT/2, SPACE_WIDTH/2, SPACE_HEIGHT - 2);
-                        gc.strokeLine(SPACE_WIDTH - 2, SPACE_HEIGHT/2, SPACE_WIDTH/2, SPACE_HEIGHT - 2);
+                        gc.fillPolygon(new double[]{SPACE_WIDTH*0.1, SPACE_WIDTH*0.5, SPACE_WIDTH*0.9},
+                                       new double[]{SPACE_HEIGHT*0.5, SPACE_HEIGHT*0.6, SPACE_HEIGHT*0.5}, 3);
                         break;
                     default:
                         this.setStyle("-fx-background-color: pink;");
@@ -143,22 +145,16 @@ public class SpaceView extends StackPane implements ViewObserver {
                 switch (((TurningPoint) action).getHeading())
                 {
                     case WEST:
-                        gc.strokeLine(15, 15, SPACE_WIDTH - 15, 15);
-                        gc.strokeLine(15, SPACE_HEIGHT - 15, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
-                        gc.strokeLine(15, SPACE_HEIGHT/2, 15, SPACE_HEIGHT - 15);
-                        gc.strokeLine(SPACE_WIDTH - 15, 15, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
-                        gc.strokeLine(15, 15, SPACE_WIDTH/2, 5);
-                        gc.strokeLine(15, 15, SPACE_WIDTH/2, 25);
+                        gc.strokePolyline(  new double[]{SPACE_WIDTH*0.2, SPACE_WIDTH*0.2, SPACE_WIDTH*0.8, SPACE_WIDTH*0.8, SPACE_WIDTH*0.2, SPACE_WIDTH*0.5, SPACE_WIDTH*0.2, SPACE_WIDTH*0.5},
+                                            new double[]{SPACE_HEIGHT*0.5, SPACE_HEIGHT*0.8, SPACE_HEIGHT*0.8, SPACE_HEIGHT*0.2, SPACE_HEIGHT*0.2, SPACE_HEIGHT*0.10, SPACE_HEIGHT*0.2, SPACE_HEIGHT*0.3},
+                                            8);
                         break;
                     case NORTH:
                     case EAST:
                     case SOUTH:
-                        gc.strokeLine(15, 15, SPACE_WIDTH - 15, 15);
-                        gc.strokeLine(15, SPACE_HEIGHT - 15, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
-                        gc.strokeLine(15, 15, 15, SPACE_HEIGHT - 15);
-                        gc.strokeLine(SPACE_WIDTH - 15, SPACE_WIDTH/2, SPACE_WIDTH - 15, SPACE_HEIGHT - 15);
-                        gc.strokeLine(SPACE_WIDTH - 15, 15, SPACE_WIDTH/2, 5);
-                        gc.strokeLine(SPACE_WIDTH - 15, 15, SPACE_WIDTH/2, 25);
+                        gc.strokePolyline(   new double[]{SPACE_WIDTH*0.8, SPACE_WIDTH*0.8, SPACE_WIDTH*0.2, SPACE_WIDTH*0.2, SPACE_WIDTH*0.8, SPACE_WIDTH*0.5, SPACE_WIDTH*0.8, SPACE_WIDTH*0.5},
+                                             new double[]{SPACE_HEIGHT*0.5, SPACE_HEIGHT*0.8, SPACE_HEIGHT*0.8, SPACE_HEIGHT*0.2, SPACE_HEIGHT*0.2, SPACE_HEIGHT*0.10, SPACE_HEIGHT*0.2, SPACE_HEIGHT*0.3},
+                                            8);
                         break;
                     default:
                         this.setStyle("-fx-background-color: cyan;");
@@ -167,21 +163,8 @@ public class SpaceView extends StackPane implements ViewObserver {
             else if(action instanceof CheckPoint)
             {
                 gc.setStroke(Color.GREEN);
-                if(((CheckPoint) action).getCheckpointNumber() == 0)
-                {
-                    //gc.strokeOval(SPACE_WIDTH/2 - 15, SPACE_HEIGHT/2 - 20, 30, 40);
-                    gc.strokeLine(SPACE_WIDTH/2 - 10,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 - 10, SPACE_HEIGHT/2 + 20 );
-                    gc.strokeLine(SPACE_WIDTH/2 + 10,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 + 10, SPACE_HEIGHT/2 + 20 );
-                    gc.strokeLine(SPACE_WIDTH/2 - 10,SPACE_HEIGHT/2 + 20, SPACE_WIDTH/2 + 10, SPACE_HEIGHT/2 + 20 );
-                    gc.strokeLine(SPACE_WIDTH/2 - 10,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 + 10, SPACE_HEIGHT/2 - 20 );
-                }
-                else
-                {
-                    for(int i = 0; i < ((CheckPoint) action).getCheckpointNumber(); i++)
-                    {
-                        gc.strokeLine(SPACE_WIDTH/2 - 25 + 5*i,SPACE_HEIGHT/2 - 20, SPACE_WIDTH/2 - 25 + 5*i, SPACE_HEIGHT/2 + 20 );
-                    }
-                }
+                gc.setFont(new Font("arial", 18));
+                gc.strokeText(Integer.toString(((CheckPoint) action).getCheckpointNumber()), SPACE_WIDTH*0.8, SPACE_HEIGHT*0.8);
             }
         }
         this.getChildren().add(spaceBackground);
@@ -206,7 +189,6 @@ public class SpaceView extends StackPane implements ViewObserver {
             } catch (Exception e) {
                 arrow.setFill(Color.MEDIUMPURPLE);
             }
-
             arrow.setRotate((90*player.getHeading().ordinal())%360);
             this.getChildren().add(arrow);
         }

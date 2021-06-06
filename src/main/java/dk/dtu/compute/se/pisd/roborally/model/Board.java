@@ -213,7 +213,13 @@ public class Board extends Subject {
         //      which is counted up every time a player makes a move; the
         //      status line should show the current player and the number
         //      of the current move!
-        return "Player: " + getCurrentPlayer().getName() + ", Next checkpoint: " + getCurrentPlayer().getNextCheckpoint();
+
+        String status = "";
+        for(Player p : players)
+        {
+            status = status + p.getName() + ": " + p.getNextCheckpoint() + "\t";
+        }
+        return status;
     }
 
     public int getCount()
