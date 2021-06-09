@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ...
+ * A template for use when reading/writing a board from/to a file
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
