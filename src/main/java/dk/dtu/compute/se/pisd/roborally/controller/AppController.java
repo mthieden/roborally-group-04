@@ -218,20 +218,22 @@ public class AppController implements Observer {
      */
     public void winnerWinnerChickenDinner() {
         if (gameController != null) {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Congratulationz you won");
-            alert.setContentText(gameController.board.getCurrentPlayer().getName() + " has won the game!");
-            Optional<ButtonType> result = alert.showAndWait();
 
-            if (!result.isPresent() || result.get() != ButtonType.OK) {
-                return; // return without exiting the application
+            int winnerIndex = 0;
+            int curMax = 0;
+            for (int i = 0; i < gameController.board.getPlayersNumber(); i++) {
+                if (gameController.board.getPlayer(i).getNextCheckpoint() > curMax) {
+                    winnerIndex = i;
+                    curMax = gameController.board.getPlayer(i).getNextCheckpoint();
+                }
             }
-        }
 
-        // If the user did not cancel, the RoboRally application will exit
-        // after the option to save the game
-        if (gameController == null || stopGame()) {
-            Platform.exit();
+            Alert alert = new Alert(AlertType.INFORMATION); //CONFIRMATION
+            alert.setTitle("Congratulationz you won");
+            alert.setContentText(gameController.board.getPlayer(winnerIndex).getName() + " has won the game!");
+            alert.showAndWait();
+
+            stopGame();
         }
     }
 
