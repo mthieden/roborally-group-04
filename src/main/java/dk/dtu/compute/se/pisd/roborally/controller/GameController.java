@@ -306,6 +306,8 @@ public class GameController extends Subject {
                 case BACKUP:
                     this.backUp(player);
                     break;
+                case UTURN:
+                    this.Uturn(player);
                 default:
                     // DO NOTHING (for now)
             }
@@ -386,6 +388,17 @@ public class GameController extends Subject {
         player.setHeading(player.getHeading().prev());
         player.setHeading(player.getHeading().prev());
         this.moveForward(player);
+        player.setHeading(player.getHeading().prev());
+        player.setHeading(player.getHeading().prev());
+    }
+
+    /**
+     * Uturn turns the robot 180 degrees while staying in the same location
+     * @author Haris Pelivani, s194749
+     *
+     */
+    public void Uturn(@NotNull Player player)
+    {
         player.setHeading(player.getHeading().prev());
         player.setHeading(player.getHeading().prev());
     }
