@@ -22,8 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.model;
 
 /**
- * ...
- *
+ * Enum for four cardinal directions
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
@@ -31,10 +30,18 @@ public enum Heading {
 
     SOUTH, WEST, NORTH, EAST;
 
+    /**
+     * Get the heading 90 degrees clockwise of the current heading
+     * @return the next heading
+     */
     public Heading next() {
         return values()[(this.ordinal() + 1) % values().length];
     }
 
+    /**
+     * Get the heading 90 degrees counter-clockwise of the current heading
+     * @return the previous heading
+     */
     public Heading prev() {
         return values()[(this.ordinal() + values().length - 1) % values().length];
     }
