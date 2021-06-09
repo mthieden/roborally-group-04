@@ -85,7 +85,11 @@ class Repository implements IRepository {
 
 
 	private Connector connector;
-	
+
+	/**
+	 * Creates a repository
+	 * @param connector
+	 */
 	Repository(Connector connector){
 		this.connector = connector;
 	}
@@ -310,6 +314,13 @@ class Repository implements IRepository {
 		return result;		
 	}
 
+	/**
+	 * Maps a command to an integer value to be stored in the database.
+	 * This should always match the intToCommand method.
+	 * @param command command to map
+	 * @return the int corresponding to the given command
+	 * @author Tobias Hansen, s164270
+	 */
 	private int commandToInt(CommandCard command) {
 		int temp;
 		if(command == null)	{
@@ -345,6 +356,13 @@ class Repository implements IRepository {
 		return temp;
 	}
 
+	/**
+	 * Maps an int to its associated command. Used when loading a game from the database.
+	 * This should always match the commandToInt method
+	 * @param commandIndex value to be mapped to a command
+	 * @return the command
+	 * @author Tobias Hansen, s164270
+	 */
 	private Command intToCommand(int commandIndex)
 	{
 		Command temp = null;
@@ -377,6 +395,12 @@ class Repository implements IRepository {
 		return temp;
 	}
 
+	/**
+	 * Create new entries to save the cards for all the players
+	 * @param game the game that the cards are from
+	 * @throws SQLException
+	 * @author Tobias Hansen, s164270
+	 */
 	private void createCardFieldsInDB(Board game) throws SQLException {
 		PreparedStatement ps = getSelectCardsStatementU();
 		ps.setInt(1, game.getGameId());
@@ -408,6 +432,11 @@ class Repository implements IRepository {
 		rs.close();
 	}
 
+	/**
+	 * Loads the cards of all the players
+	 * @param game the game that the cards are saved to
+	 * @throws SQLException
+	 */
 	private void loadCardFieldsFromDB(Board game) throws SQLException {
 		PreparedStatement ps = getSelectCardsASCStatement();
 		ps.setInt(1, game.getGameId());
@@ -455,6 +484,12 @@ class Repository implements IRepository {
 		rs.close();
 	}
 
+	/**
+	 * Update existing entries with the cards of all the players
+	 * @param game the game that the cards are from
+	 * @throws SQLException
+	 * @author Tobias Hansen, s164270
+	 */
 	private void updateCardFieldsInDB(Board game) throws SQLException {
 		PreparedStatement ps = getSelectCardsStatementU();
 		ps.setInt(1, game.getGameId());
@@ -487,6 +522,11 @@ class Repository implements IRepository {
 	}
 
 
+	/**
+	 * Create new entries in the DB for the players
+	 * @param game the game the players are from
+	 * @throws SQLException
+	 */
 	private void createPlayersInDB(Board game) throws SQLException {
 		// TODO code should be more defensive
 		PreparedStatement ps = getSelectPlayersStatementU();
@@ -509,7 +549,12 @@ class Repository implements IRepository {
 
 		rs.close();
 	}
-	
+
+	/**
+	 * Load the players
+	 * @param game the game that the players are saved to
+	 * @throws SQLException
+	 */
 	private void loadPlayersFromDB(Board game) throws SQLException {
 		PreparedStatement ps = getSelectPlayersASCStatement();
 		ps.setInt(1, game.getGameId());
@@ -539,7 +584,12 @@ class Repository implements IRepository {
 		}
 		rs.close();
 	}
-	
+
+	/**
+	 * Update existing entires in the DB for the players
+	 * @param game the game the players are from
+	 * @throws SQLException
+	 */
 	private void updatePlayersInDB(Board game) throws SQLException {
 		PreparedStatement ps = getSelectPlayersStatementU();
 		ps.setInt(1, game.getGameId());
