@@ -22,8 +22,7 @@
 package dk.dtu.compute.se.pisd.roborally.dal;
 
 /**
- * ...
- *
+ * Class for accessing the repository
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
