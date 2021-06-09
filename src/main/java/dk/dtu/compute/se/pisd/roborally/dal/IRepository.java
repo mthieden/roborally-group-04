@@ -26,19 +26,38 @@ import dk.dtu.compute.se.pisd.roborally.model.Board;
 import java.util.List;
 
 /**
- * ...
+ * An interface for saving and loading games to/from a database
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
 public interface IRepository {
-	
+
+	/**
+	 * Create a new save in the database for the specified game
+	 * @param game the game being saved
+	 * @return true if successful
+	 */
  	boolean createGameInDB(Board game);
-	
+
+	/**
+	 * Update an existing save in the database for the specified game
+	 * @param game the game being saved
+	 * @return true if successful
+	 */
 	boolean updateGameInDB(Board game);
-	
+
+	/**
+	 * Loads a game specified by the game id, if a save with that id exists in the database
+	 * @param id the id of the game being loaded
+	 * @return true if successful
+	 */
 	Board loadGameFromDB(int id);
-	
+
+	/**
+	 * Get a list of all games saved in the database
+	 * @return a list of games saved in the database
+	 */
 	List<GameInDB> getGames();
 
 }

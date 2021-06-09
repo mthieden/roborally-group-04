@@ -30,7 +30,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * This class is used to specify the information necessary to connect to the database.
+ * This class is used to specify the information necessary to connect to your database.
+ * These values may be different depending on your particular database setup.
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *
