@@ -25,8 +25,7 @@ import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * ...
- *
+ * This class is basically a container for a command.
  * @author Ekkart Kindler, ekki@dtu.dk
  *
  */
