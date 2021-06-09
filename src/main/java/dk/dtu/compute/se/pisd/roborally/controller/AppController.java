@@ -66,6 +66,10 @@ public class AppController implements Observer {
         this.roboRally = roboRally;
     }
 
+    /**
+     * Starts a new game. Prompts the user to select board and number of players.
+     * @author Tobias Hansen, s164270
+     */
     public void newGame() {
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(PLAYER_NUMBER_OPTIONS.get(0), PLAYER_NUMBER_OPTIONS);
         dialog.setTitle("Player number");
@@ -123,7 +127,7 @@ public class AppController implements Observer {
     }
 
     /**
-     * Save a game to the database
+     * Save the current game to the database
      * @author Tobias Hansen, s164270
      */
     public void saveGame() {
@@ -194,6 +198,9 @@ public class AppController implements Observer {
         return false;
     }
 
+    /**
+     * Prompts the user and exits the application if they click OK
+     */
     public void exit() {
         if (gameController != null) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -214,7 +221,7 @@ public class AppController implements Observer {
     }
 
     /**
-     * Display the game over screen
+     * Display the game over screen and closes the current game.
      */
     public void winnerWinnerChickenDinner() {
         if (gameController != null) {
