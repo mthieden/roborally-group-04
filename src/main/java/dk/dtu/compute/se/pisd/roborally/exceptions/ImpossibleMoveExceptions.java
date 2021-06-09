@@ -10,6 +10,12 @@ public class ImpossibleMoveExceptions extends Exception
     private Space space;
     private Heading heading;
 
+    /**
+     *
+     * @param player robot trying to make an impossible move
+     * @param space space it was trying to move to
+     * @param heading direction it was heading in
+     */
     public ImpossibleMoveExceptions(Player player, Space space, Heading heading )
     {
         super("Cant make that move mate!");
