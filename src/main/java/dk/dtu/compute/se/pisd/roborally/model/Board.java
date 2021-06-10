@@ -43,6 +43,8 @@ public class Board extends Subject {
 
     public final String boardName;
 
+    public int numberOfCheckpoints = 1;
+
     private Integer gameId;
 
     private final Space[][] spaces;
@@ -54,8 +56,6 @@ public class Board extends Subject {
     private Phase phase = INITIALISATION;
 
     private int step = 0;
-
-    private int count = 0;
 
     private boolean stepMode;
 
@@ -240,19 +240,5 @@ public class Board extends Subject {
             status = status + p.getName() + ": " + p.getNextCheckpoint() + "\t";
         }
         return status;
-    }
-
-    public int getCount()
-    {
-        return count;
-    }
-
-    public void setCount(int count)
-    {
-        if(this.count != count)
-        {
-            this.count = count;
-            notifyChange();
-        }
     }
 }

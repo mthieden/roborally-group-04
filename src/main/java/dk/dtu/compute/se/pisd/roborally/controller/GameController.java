@@ -475,10 +475,11 @@ public class GameController extends Subject {
      */
     private void checkForWinner()
     {
+        System.out.println(board.numberOfCheckpoints);
         boolean gameOver = false;
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
-            if(player.getNextCheckpoint() > 4) //TODO replace magic number
+            if(player.getNextCheckpoint() == board.numberOfCheckpoints)
             {
                 gameOver = true;
             }

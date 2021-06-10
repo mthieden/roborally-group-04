@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import dk.dtu.compute.se.pisd.roborally.controller.CheckPoint;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.BoardTemplate;
 import dk.dtu.compute.se.pisd.roborally.fileaccess.model.SpaceTemplate;
 import dk.dtu.compute.se.pisd.roborally.controller.FieldAction;
@@ -76,15 +77,23 @@ public class LoadBoard {
 			reader = gson.newJsonReader(new InputStreamReader(inputStream));
 			BoardTemplate template = gson.fromJson(reader, BoardTemplate.class);
 
+			int numberOfCheckpoints = 0;
 			result = new Board(template.width, template.height, boardname);
 			for (SpaceTemplate spaceTemplate: template.spaces) {
 			    Space space = result.getSpace(spaceTemplate.x, spaceTemplate.y);
 			    if (space != null) {
                     space.getFieldActions().addAll(spaceTemplate.actions);
                     space.getWalls().addAll(spaceTemplate.walls);
+                    for(FieldAction action : spaceTemplate.actions) {
+                        if(action instanceof CheckPoint) {
+                           numberOfCheckpoints++;
+                        }
+                    }
                 }
             }
 			reader.close();
+            result.numberOfCheckpoints = numberOfCheckpoints;
+
 			return result;
 		} catch (IOException e1) {
             if (reader != null) {
