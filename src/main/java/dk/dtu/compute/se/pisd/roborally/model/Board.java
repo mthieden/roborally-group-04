@@ -59,6 +59,12 @@ public class Board extends Subject {
 
     private boolean stepMode;
 
+    /**
+     * Create a board with the specified dimensions and name
+     * @param width the width of the board
+     * @param height the height of the board
+     * @param boardName the name of the board
+     */
     public Board(int width, int height, @NotNull String boardName) {
         this.boardName = boardName;
         this.width = width;
@@ -91,6 +97,12 @@ public class Board extends Subject {
         }
     }
 
+    /**
+     * Get the space specified by the x and y coordinates
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     * @return the space at the specified coordinates
+     */
     public Space getSpace(int x, int y) {
         if (x >= 0 && x < width &&
                 y >= 0 && y < height) {
@@ -104,6 +116,10 @@ public class Board extends Subject {
         return players.size();
     }
 
+    /**
+     * Adds a player to the board
+     * @param player the player to be added
+     */
     public void addPlayer(@NotNull Player player) {
         if (player.board == this && !players.contains(player)) {
             players.add(player);
@@ -202,6 +218,10 @@ public class Board extends Subject {
         return getSpace(x, y);
     }
 
+    /**
+     * Get a status message with the player names and their next checkpoints
+     * @return the status message
+     */
     public String getStatusMessage() {
         // This is actually a view aspect, but for making the first task easy for
         // the students, this method gives a string representation of the current

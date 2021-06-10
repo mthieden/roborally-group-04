@@ -44,6 +44,11 @@ public class LoadBoard {
     private static final String DEFAULTBOARD = "defaultboard";
     private static final String JSON_EXT = "json";
 
+    /**
+     * Load a board from file
+     * @param boardname filename of the board without the file extension
+     * @return the loaded board
+     */
     public static Board loadBoard(String boardname) {
         if (boardname == null) {
             boardname = DEFAULTBOARD;
@@ -97,6 +102,11 @@ public class LoadBoard {
 		return null;
     }
 
+    /**
+     * Save a board to a file
+     * @param board board being saved
+     * @param name name of the file (without the file extension)
+     */
     public static void saveBoard(Board board, String name) {
         BoardTemplate template = new BoardTemplate();
         template.width = board.width;

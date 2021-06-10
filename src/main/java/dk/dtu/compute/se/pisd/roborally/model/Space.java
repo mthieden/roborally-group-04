@@ -46,6 +46,12 @@ public class Space extends Subject {
     public List<Heading> walls = new ArrayList<>();
 
 
+    /**
+     * Create a space for a board
+     * @param board the board
+     * @param x x-coordinate of the space in the board
+     * @param y y-coordinate of the space in the board
+     */
     public Space(Board board, int x, int y) {
         this.board = board;
         this.x = x;
@@ -57,6 +63,10 @@ public class Space extends Subject {
         return player;
     }
 
+    /**
+     * Set the player on this space
+     * @param player a player or null
+     */
     public void setPlayer(Player player) {
         Player oldPlayer = this.player;
         if (player != oldPlayer &&
@@ -74,9 +84,7 @@ public class Space extends Subject {
     }
 
     /**
-     *
      * @author Markus Visvaldis Ingemann Thieden, s164920
-     *
      * function to get all wall orientation of the space
      * @return: array of all walls on the space
      */

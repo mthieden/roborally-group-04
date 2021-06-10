@@ -93,7 +93,7 @@ public class GameController extends Subject {
             } else
            {
                 throw new ImpossibleMoveExceptions(player, space, heading);
-            }
+           }
         }
         List<Heading> spaceWalls = player.getSpace().getWalls();
 
@@ -152,6 +152,10 @@ public class GameController extends Subject {
     }
 
 
+    /**
+     * Generates a random CommandCard
+     * @return a random CommandCard
+     */
     private CommandCard generateRandomCommandCard() {
         Command[] commands = Command.values();
         int random = (int) (Math.random() * commands.length);
@@ -169,7 +173,10 @@ public class GameController extends Subject {
         board.setStep(0);
     }
 
-
+    /**
+     * Makes the specified field visible for all players
+     * @param register the register being made visible
+     */
     private void makeProgramFieldsVisible(int register) {
         if (register >= 0 && register < Player.NO_REGISTERS) {
             for (int i = 0; i < board.getPlayersNumber(); i++) {
@@ -181,6 +188,9 @@ public class GameController extends Subject {
     }
 
 
+    /**
+     * Makes all program field visible for all players
+     */
     private void makeProgramFieldsInvisible() {
         for (int i = 0; i < board.getPlayersNumber(); i++) {
             Player player = board.getPlayer(i);
@@ -197,13 +207,17 @@ public class GameController extends Subject {
         continuePrograms();
     }
 
-
+    /**
+     * Executes the programs in step mode
+     */
     public void executeStep() {
         board.setStepMode(true);
         continuePrograms();
     }
 
-
+    /**
+     * Executes the programs in normal mode
+     */
     private void continuePrograms() {
         do {
             executeNextStep();
@@ -211,6 +225,9 @@ public class GameController extends Subject {
     }
 
 
+    /**
+     * Executes the next step
+     */
     private void executeNextStep() {
         Player currentPlayer = board.getCurrentPlayer();
         if (board.getPhase() == Phase.ACTIVATION && currentPlayer != null) {
@@ -250,6 +267,10 @@ public class GameController extends Subject {
         }
     }
 
+    /**
+     * Executes a command option and sets the phase back to ACTIVATION
+     * @param command the command being executed
+     */
     public void executeCommandOptionAndContinue(@NotNull Command command)
     {
         Player currentPlayer = board.getCurrentPlayer();
@@ -274,7 +295,6 @@ public class GameController extends Subject {
             }
         }
     }
-
 
     /**
      * Executes a command
@@ -316,8 +336,8 @@ public class GameController extends Subject {
 
     /**
      * moveForward moves the robot 1 space in the current direction
-     * moveForward uses the board.getNeightbour to change the space
      *
+     * @param player thee player/robot being moved forward
      * @author Mathias Ravn, s195468
      * @author Markus Visvaldis Ingemann Thieden, s164920
      *
@@ -343,14 +363,20 @@ public class GameController extends Subject {
      * fastForward moves the robot 2 spaces in the current direction
      * fastForward calls the moveForward command to run, which is the function
      *
+     * @param player the player/robot being moved forward
      * @author Mathias Ravn, s195468
-     *
      */
     public void fastForward(@NotNull Player player) {
         this.moveForward(player);
         this.moveForward(player);
     }
 
+    /**
+     * Moves the robot 3 spaces forward in the current direction of the robot
+     * This is done by repeating the moveForward command three times.
+     * @param player the player/robot being moved forward
+     * @author Mathias Ravn, s195468
+     */
     public void fastFastForward(@NotNull Player player) {
         this.moveForward(player);
         this.moveForward(player);
@@ -360,6 +386,7 @@ public class GameController extends Subject {
      * turnRight causes the robots direction to change 90 degrees clockwise
      * the function calls the setHeading function which has a builtin function .next
      * to do what the is intended for.
+     * @param player the player/robot turning right
      * @author Mathias Ravn, s195468
      *
      */
@@ -371,6 +398,7 @@ public class GameController extends Subject {
      * the function calls the setHeading function which has a builtin function .next
      * to do what the is intended for.
      *
+     * @param player the player/robot turning left
      * @author Mathias Ravn, s195468
      *
      */
@@ -443,6 +471,7 @@ public class GameController extends Subject {
 
     /**
      * Checks if a player has reached the final checkpoint and won the game
+     * @author Tobias Hansen, s164270
      */
     private void checkForWinner()
     {

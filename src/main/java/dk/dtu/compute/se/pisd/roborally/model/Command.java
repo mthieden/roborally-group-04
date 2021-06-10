@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * ...
+ * Enum for the different types of commands
  *
  * @author Ekkart Kindler, ekki@dtu.dk
  *

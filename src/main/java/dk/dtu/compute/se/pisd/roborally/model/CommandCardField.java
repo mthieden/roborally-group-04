@@ -24,10 +24,9 @@ package dk.dtu.compute.se.pisd.roborally.model;
 import dk.dtu.compute.se.pisd.designpatterns.observer.Subject;
 
 /**
- * ...
- *
+ * This class is used for the fields of the registers and the players' hands
+ * A CommandCardField may contain a CommandCard or it may be empty.
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
 public class CommandCardField extends Subject {
 

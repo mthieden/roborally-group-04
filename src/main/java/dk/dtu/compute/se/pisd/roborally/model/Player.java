@@ -49,6 +49,12 @@ public class Player extends Subject {
     private CommandCardField[] program;
     private CommandCardField[] cards;
 
+    /**
+     * Creates a new player with empty CommandCardFields
+     * @param board associated board
+     * @param color color of the player
+     * @param name name of the player
+     */
     public Player(@NotNull Board board, String color, @NotNull String name) {
         this.board = board;
         this.name = name;
@@ -70,6 +76,10 @@ public class Player extends Subject {
         return name;
     }
 
+    /**
+     * Set a new name for the player
+     * @param name the new name
+     */
     public void setName(String name) {
         if (name != null && !name.equals(this.name)) {
             this.name = name;
@@ -84,6 +94,10 @@ public class Player extends Subject {
         return color;
     }
 
+    /**
+     * Set a new name for the player
+     * @param color the new color
+     */
     public void setColor(String color) {
         this.color = color;
         notifyChange();
@@ -96,6 +110,10 @@ public class Player extends Subject {
         return space;
     }
 
+    /**
+     * Set the player on a new space and remove its association with the old space.
+     * @param space the new space
+     */
     public void setSpace(Space space) {
         Space oldSpace = this.space;
         if (space != oldSpace &&

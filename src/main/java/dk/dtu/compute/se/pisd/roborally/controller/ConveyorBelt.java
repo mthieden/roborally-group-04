@@ -50,6 +50,13 @@ public class ConveyorBelt extends FieldAction {
         this.heading=heading;
     }
 
+    /**
+     * Moves a player standing on it 1 space in the direction of the conveyor belt (if possible).
+     * @param gameController the gameController of the game
+     * @param space the space this action should be executed for
+     * @return
+     * @author Markus Visvaldis Ingemann Thieden, s164920
+     */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         Player player = space.getPlayer();

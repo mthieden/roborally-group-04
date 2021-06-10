@@ -49,6 +49,12 @@ public class TurningPoint extends FieldAction {
         this.heading = heading;
     }
 
+    /**
+     * Turns the robot either clockwise or counter-clockwise depending on the heading of the TurningPoint
+     * @param gameController the gameController of the respective game
+     * @param space the space this action should be executed for
+     * @return
+     */
     @Override
     public boolean doAction(@NotNull GameController gameController, @NotNull Space space) {
         Player player = space.getPlayer();
