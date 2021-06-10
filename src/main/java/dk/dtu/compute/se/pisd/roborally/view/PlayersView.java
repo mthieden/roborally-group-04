@@ -39,6 +39,10 @@ public class PlayersView extends TabPane implements ViewObserver {
 
     private PlayerView[] playerViews;
 
+    /**
+     * Creates tabs with each player's PlayerView
+     * @param gameController the GameController for the game
+     */
     public PlayersView(GameController gameController) {
         board = gameController.board;
 
@@ -53,6 +57,10 @@ public class PlayersView extends TabPane implements ViewObserver {
         update(board);
     }
 
+    /**
+     * Update to show the tab of the current player
+     * @param subject the GameBoard
+     */
     @Override
     public void updateView(Subject subject) {
         if (subject == board) {
