@@ -140,6 +140,10 @@ public class CardFieldView extends GridPane implements ViewObserver {
         return null;
     }
 
+    /**
+     * Update the CardFieldView
+     * @param subject
+     */
     @Override
     public void updateView(Subject subject) {
         if (subject == field && subject != null) {
@@ -153,7 +157,6 @@ public class CardFieldView extends GridPane implements ViewObserver {
     }
 
     private class OnDragDetectedHandler implements EventHandler<MouseEvent> {
-
         @Override
         public void handle(MouseEvent event) {
             Object t = event.getTarget();

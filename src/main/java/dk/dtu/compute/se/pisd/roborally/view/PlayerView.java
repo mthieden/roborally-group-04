@@ -63,7 +63,7 @@ public class PlayerView extends Tab implements ViewObserver {
     private GameController gameController;
 
     /**
-     * Creates
+     * Creates the main PlayerView with all its fields and buttons
      * @param gameController the GameController object
      * @param player the Player object
      */
@@ -138,6 +138,10 @@ public class PlayerView extends Tab implements ViewObserver {
         }
     }
 
+    /**
+     * Update the view
+     * @param subject the GameBoard
+     */
     @Override
     public void updateView(Subject subject) {
         if (subject == player.board) {

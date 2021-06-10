@@ -80,6 +80,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         update(space);
     }
 
+    /**
+     * Draw the space and all its associated field actions
+     */
     private void drawBackground()
     {
         Canvas spaceBackground = new Canvas(SPACE_WIDTH, SPACE_HEIGHT);
@@ -170,6 +173,9 @@ public class SpaceView extends StackPane implements ViewObserver {
         this.getChildren().add(spaceBackground);
     }
 
+    /**
+     * Draw the player occupying the field (if there is one)
+     */
     private void updatePlayer() {
 
         if(this.getChildren().size() > 1)
