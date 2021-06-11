@@ -451,6 +451,7 @@ public class GameController extends Subject {
 
     /**
      * Executes the actions of all fields that have a player on them
+     * @author Tobias Hansen, s164270
      */
     public void executeSpaceActions()
     {
@@ -490,14 +491,4 @@ public class GameController extends Subject {
 
         }
     }
-
-    /**
-     * A method called when no corresponding controller operation is implemented yet. This
-     * should eventually be removed.
-     */
-    public void notImplemented() {
-        // XXX just for now to indicate that the actual method is not yet implemented
-        assert false;
-    }
-
 }

@@ -50,7 +50,6 @@ import java.util.Optional;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- * @author Tobias Hansen, s164270
  */
 public class AppController implements Observer {
 
@@ -222,6 +221,8 @@ public class AppController implements Observer {
 
     /**
      * Display the game over screen and closes the current game.
+     * @author Markus Visvaldis Ingemann Thieden, s164920
+     * @author Tobias Hansen, s164270
      */
     public void winnerWinnerChickenDinner() {
         if (gameController != null) {
