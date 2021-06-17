@@ -349,6 +349,9 @@ class Repository implements IRepository {
 				case OPTION_LEFT_RIGHT:
 					temp = 7;
 					break;
+				case UTURN:
+					temp = 8;
+					break;
 				default:
 					temp = 0;
 			}
@@ -388,6 +391,9 @@ class Repository implements IRepository {
 				break;
 			case 7:
 				temp = Command.OPTION_LEFT_RIGHT;
+				break;
+			case 8:
+				temp = Command.UTURN;
 				break;
 			default:
 				// DO NOTHING (for now)
